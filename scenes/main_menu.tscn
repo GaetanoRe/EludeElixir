@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhxy2s16fiqxk"]
+
+[ext_resource type="Script" path="res://scripts/menus/start/main_menu.gd" id="1_7anmh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cek8p"]
+font_size = 50
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7anmh")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -124.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="StartGameButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="QuitButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 335.0
+offset_top = 158.0
+offset_right = 803.0
+offset_bottom = 321.0
+text = "Elude Elixir"
+label_settings = SubResource("LabelSettings_cek8p")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="HBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
