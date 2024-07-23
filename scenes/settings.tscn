@@ -1,0 +1,122 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3nyf8tp7aff4"]
+
+[ext_resource type="Script" path="res://settings.gd" id="1_rk5sc"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rk5sc")
+
+[node name="Volume - Music" type="TabBar" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -169.5
+offset_top = -223.0
+offset_right = 169.5
+offset_bottom = -177.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme_override_colors/font_unselected_color = Color(0.360784, 0.227451, 0.576471, 1)
+tab_count = 11
+current_tab = 5
+clip_tabs = false
+select_with_rmb = true
+tab_0/title = "0"
+tab_1/title = "1"
+tab_2/title = "2"
+tab_3/title = "3"
+tab_4/title = "4"
+tab_5/title = "5"
+tab_6/title = "6"
+tab_7/title = "7"
+tab_8/title = "8"
+tab_9/title = "9"
+tab_10/title = "10"
+
+[node name="LineEdit" type="LineEdit" parent="Volume - Music"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -86.0
+offset_right = 40.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+text = "MUSIC"
+alignment = 1
+editable = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Volume - Sound Effects" type="TabBar" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -169.5
+offset_top = -98.0
+offset_right = 169.5
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme_override_colors/font_unselected_color = Color(0.360784, 0.227451, 0.576471, 1)
+tab_count = 11
+current_tab = 5
+clip_tabs = false
+select_with_rmb = true
+tab_0/title = "0"
+tab_1/title = "1"
+tab_2/title = "2"
+tab_3/title = "3"
+tab_4/title = "4"
+tab_5/title = "5"
+tab_6/title = "6"
+tab_7/title = "7"
+tab_8/title = "8"
+tab_9/title = "9"
+tab_10/title = "10"
+
+[node name="LineEdit" type="LineEdit" parent="Volume - Sound Effects"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -71.5
+offset_top = -40.0
+offset_right = 71.5
+offset_bottom = -9.0
+grow_horizontal = 2
+focus_mode = 0
+text = "SOUND EFFECTS"
+alignment = 1
+editable = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Menu Music" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+bus = &"SoundEffects"
+
+[connection signal="tab_selected" from="Volume - Music" to="." method="_on_volume__music_tab_selected"]
+[connection signal="tab_selected" from="Volume - Sound Effects" to="." method="_on_volume__sound_effects_tab_selected"]
