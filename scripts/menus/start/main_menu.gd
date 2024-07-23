@@ -15,10 +15,15 @@ func _process(delta):
 func _on_start_game_button_pressed():
 	var next_scene = load("res://scenes/main.tscn")
 	get_tree().change_scene_to_packed(next_scene)
-	pass # Replace with function body.
+	
 
 
 
 func _on_quit_button_pressed():
 	get_tree().quit()
-	pass # Replace with function body.
+	
+
+
+func _on_settings_button_pressed():
+	var next_scene = load("res://scenes/settings.tscn")
+	get_tree().change_scene_to_packed(next_scene)
