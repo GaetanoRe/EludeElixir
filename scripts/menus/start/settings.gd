@@ -2,7 +2,6 @@ extends Control
 
 var bus_Music: int
 var bus_SFX: int
-var tab: int
 var tab_db: float
 var tab_linear: int
 var mute = -60

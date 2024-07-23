@@ -1,3 +1,11 @@
 [gd_scene format=3 uid="uid://ba51p6hctw0ao"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="TileMap"]
+rendering_quadrant_size = 32
+format = 2
+
+[node name="Dungeon Music" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="Sound Effects" type="AudioStreamPlayer2D" parent="."]
+bus = &"SoundEffects"

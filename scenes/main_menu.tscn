@@ -51,6 +51,12 @@ text = "Elude Elixir"
 label_settings = SubResource("LabelSettings_cek8p")
 horizontal_alignment = 1
 
+[node name="Menu Music" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+bus = &"SoundEffects"
+
 [connection signal="pressed" from="HBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
