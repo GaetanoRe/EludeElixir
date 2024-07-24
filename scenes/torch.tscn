@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://dar2cn8cq053t"]
+[gd_scene load_steps=18 format=3 uid="uid://byq12igniy2vo"]
 
+[ext_resource type="Script" path="res://scripts/misc/torch.gd" id="1_ci52r"]
 [ext_resource type="Texture2D" uid="uid://ci0hyvrra0f6y" path="res://assets/sprites/objects/Torch-Sheet.png" id="1_oqk8o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2svpf"]
@@ -76,7 +77,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_t76c0")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"torch",
 "speed": 10.0
 }]
 
@@ -96,13 +97,14 @@ fill_from = Vector2(0.5, 0.5)
 radius = 77.0065
 
 [node name="Torch" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_ci52r")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y20nr")
-animation = &"new_animation"
-autoplay = "new_animation"
-frame = 9
-frame_progress = 1.0
+animation = &"torch"
+autoplay = "torch"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)

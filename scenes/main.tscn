@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dvci5w0cj4dms" path="res://scenes/player.tscn" id="3_pfwmd"]
 [ext_resource type="Texture2D" uid="uid://dql56kiwaugna" path="res://assets/tilemaps/png/Floor tile.png" id="3_qewob"]
 [ext_resource type="Texture2D" uid="uid://cr0me3aha5hml" path="res://assets/tilemaps/png/Rock Wall.png" id="4_txqtp"]
-[ext_resource type="PackedScene" path="res://scenes/torch.tscn" id="4_ty7ci"]
+[ext_resource type="PackedScene" uid="uid://byq12igniy2vo" path="res://scenes/torch.tscn" id="4_ty7ci"]
 [ext_resource type="Texture2D" uid="uid://gxogxrg1fmrj" path="res://assets/tilemaps/png/Cave WaLL.png" id="5_17vwp"]
 [ext_resource type="PackedScene" path="res://scenes/platform.tscn" id="7_2dtjv"]
 
