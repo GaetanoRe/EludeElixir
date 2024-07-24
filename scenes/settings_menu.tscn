@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b3nyf8tp7aff4"]
 
-[ext_resource type="Script" path="res://scripts/menus/start/settings.gd" id="1_rk5sc"]
+[ext_resource type="Script" path="res://scripts/menus/start/settings_menu.gd" id="1_h3jse"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_rk5sc")
+script = ExtResource("1_h3jse")
 
 [node name="Volume - Music" type="TabBar" parent="."]
 layout_mode = 1
@@ -112,11 +112,18 @@ editable = false
 selecting_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="Menu Music" type="AudioStreamPlayer" parent="."]
-bus = &"Music"
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 560.0
+offset_right = 117.0
+offset_bottom = 606.0
+focus_mode = 0
+text = "Back"
 
-[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
-bus = &"SoundEffects"
-
+[connection signal="tab_clicked" from="Volume - Music" to="." method="_on_volume__music_tab_clicked"]
 [connection signal="tab_selected" from="Volume - Music" to="." method="_on_volume__music_tab_selected"]
+[connection signal="tab_clicked" from="Volume - Sound Effects" to="." method="_on_volume__sound_effects_tab_clicked"]
 [connection signal="tab_selected" from="Volume - Sound Effects" to="." method="_on_volume__sound_effects_tab_selected"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_button_pressed"]

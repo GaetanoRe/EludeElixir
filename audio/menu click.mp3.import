@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cukmbr1vf1cb8"
+path="res://.godot/imported/menu click.mp3-a9fd798af3f5b0b2fefeff26b207b01c.mp3str"
+
+[deps]
+
+source_file="res://audio/menu click.mp3"
+dest_files=["res://.godot/imported/menu click.mp3-a9fd798af3f5b0b2fefeff26b207b01c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
