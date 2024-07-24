@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3nyf8tp7aff4"]
+[gd_scene load_steps=3 format=3 uid="uid://b3nyf8tp7aff4"]
 
 [ext_resource type="Script" path="res://scripts/menus/start/settings.gd" id="1_rk5sc"]
+[ext_resource type="AudioStream" uid="uid://cukmbr1vf1cb8" path="res://audio/menu click.mp3" id="2_qsogy"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -112,11 +113,23 @@ editable = false
 selecting_enabled = false
 drag_and_drop_selection_enabled = false
 
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 560.0
+offset_right = 117.0
+offset_bottom = 606.0
+focus_mode = 0
+text = "Back"
+
 [node name="Menu Music" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
 
-[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+[node name="ButtonClickSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_qsogy")
 bus = &"SoundEffects"
 
 [connection signal="tab_selected" from="Volume - Music" to="." method="_on_volume__music_tab_selected"]
 [connection signal="tab_selected" from="Volume - Sound Effects" to="." method="_on_volume__sound_effects_tab_selected"]
+[connection signal="pressed" from="BackButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

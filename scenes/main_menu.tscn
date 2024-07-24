@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhxy2s16fiqxk"]
+[gd_scene load_steps=4 format=3 uid="uid://dhxy2s16fiqxk"]
 
 [ext_resource type="Script" path="res://scripts/menus/start/main_menu.gd" id="1_7anmh"]
+[ext_resource type="AudioStream" uid="uid://cukmbr1vf1cb8" path="res://audio/menu click.mp3" id="2_3faji"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cek8p"]
 font_size = 50
@@ -54,7 +55,8 @@ horizontal_alignment = 1
 [node name="Menu Music" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
 
-[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+[node name="ButtonClickSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_3faji")
 bus = &"SoundEffects"
 
 [connection signal="pressed" from="HBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]

@@ -44,7 +44,10 @@ func _on_volume__sound_effects_tab_selected(tab):
 		print(tab_db)
 		print(AudioServer.get_bus_volume_db(bus_SFX))
 	
-	
-	
-	
-	
+
+
+
+# Back Button - Change scene to Main Menu
+func _on_back_button_pressed():
+	var next_scene = load("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_packed(next_scene)

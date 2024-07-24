@@ -27,3 +27,4 @@ func _on_quit_button_pressed():
 func _on_settings_button_pressed():
 	var next_scene = load("res://scenes/settings.tscn")
 	get_tree().change_scene_to_packed(next_scene)
+#   $ButtonClickSFX.play()    <- correct command, but it does not work
