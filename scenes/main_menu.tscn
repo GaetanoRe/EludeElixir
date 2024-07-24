@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhxy2s16fiqxk"]
+[gd_scene load_steps=4 format=3 uid="uid://dhxy2s16fiqxk"]
 
 [ext_resource type="Script" path="res://scripts/menus/start/main_menu.gd" id="1_7anmh"]
+[ext_resource type="AudioStream" uid="uid://c1bpdsc4quoqa" path="res://assets/Sounds/Menu Click.mp3" id="2_ehbur"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cek8p"]
 font_size = 50
@@ -50,6 +51,14 @@ offset_bottom = 321.0
 text = "Elude Elixir"
 label_settings = SubResource("LabelSettings_cek8p")
 horizontal_alignment = 1
+
+[node name="Sound Effects" type="AudioStreamPlayer" parent="."]
+bus = &"SoundEffects"
+
+[node name="SFX_click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ehbur")
+volume_db = -1.874
+bus = &"SoundEffects"
 
 [connection signal="pressed" from="HBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
