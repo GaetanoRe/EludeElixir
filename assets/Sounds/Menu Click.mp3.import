@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c1bpdsc4quoqa"
+path="res://.godot/imported/Menu Click.mp3-527c710760d8ba6def9004c287155447.mp3str"
+
+[deps]
+
+source_file="res://assets/Sounds/Menu Click.mp3"
+dest_files=["res://.godot/imported/Menu Click.mp3-527c710760d8ba6def9004c287155447.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
