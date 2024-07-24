@@ -19,7 +19,6 @@ func _on_start_game_button_pressed():
 
 
 
-
 func _on_settings_button_pressed():
 	SoundFx.button_click()
 	var next_scene = load("res://scenes/settings_menu.tscn")
@@ -27,7 +26,6 @@ func _on_settings_button_pressed():
 
 
 
-
 func _on_quit_button_pressed():
 	get_tree().quit()
-	
+
