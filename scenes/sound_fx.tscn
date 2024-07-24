@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba8e4q85f1xi2"]
+
+[ext_resource type="Script" path="res://scripts/menus/start/SoundFX.gd" id="1_bvlmi"]
+[ext_resource type="AudioStream" uid="uid://cukmbr1vf1cb8" path="res://audio/menu click.mp3" id="2_xngyr"]
+[ext_resource type="AudioStream" uid="uid://5dewwpx61cqh" path="res://audio/volume click.mp3" id="3_jshu7"]
+
+[node name="SoundFX" type="Node"]
+script = ExtResource("1_bvlmi")
+
+[node name="ButtonClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xngyr")
+
+[node name="VolumeClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jshu7")
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+
+[node name="DungeonMusic" type="AudioStreamPlayer" parent="."]
