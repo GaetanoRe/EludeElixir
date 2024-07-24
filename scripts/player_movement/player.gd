@@ -16,17 +16,20 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	
+	playerVel = velocity
+	
 	var direction = Input.get_vector("walk_left", "walk_right", "jump", "crouch")
 	if(direction.x != 0):
 		playerVel.x = direction.x * speed 
 	else:
 		playerVel.x = 0
+	if(Input.is_action_pressed("jump") and is_on_floor()):
+		playerVel.y += jumpVel
 	
 	if(!is_on_floor()):
 		playerVel.y += gravity * delta
 	
-	if(Input.is_action_just_pressed("jump") and is_on_floor()):
-		playerVel.y += jumpVel
+	
 	velocity = playerVel
 	move_and_slide()
 
