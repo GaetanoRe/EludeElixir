@@ -2,10 +2,7 @@ extends Control
 
 var bus_Music: int
 var bus_SFX: int
-var tab_db: float
-var tab_linear: int
-var mute = -60
-
+var volume_db = [-80, -30, -23, -16, -12, -9, -8, -6, -5, -4.3, -2.8, -1.6, -1, -0.5, 0]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,27 +13,14 @@ func _ready():
 
 # Change Music volume when selected
 func _on_volume__music_tab_selected(tab):
-	if tab == 0:
 		SoundFx.volume_click()
-		AudioServer.set_bus_volume_db(bus_Music, mute)
-
-	else: 
-		SoundFx.volume_click()
-		tab_db = -20 * ( log(11-tab) / log(10))
-		AudioServer.set_bus_volume_db(bus_Music,tab_db)
-
+		AudioServer.set_bus_volume_db(bus_Music, volume_db[tab])
 
 
 # Change Sound Effects volume when selected
 func _on_volume__sound_effects_tab_selected(tab):
-	if tab == 0:
 		SoundFx.volume_click()
-		AudioServer.set_bus_volume_db(bus_SFX, mute)
-
-	else: 
-		SoundFx.volume_click()
-		tab_db = -20 * ( log(11-tab) / log(10))
-		AudioServer.set_bus_volume_db(bus_SFX,tab_db)
+		AudioServer.set_bus_volume_db(bus_SFX, volume_db[tab])
 
 
 
