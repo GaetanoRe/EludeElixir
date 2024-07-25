@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvci5w0cj4dms"]
+[gd_scene load_steps=7 format=3 uid="uid://ky0t2odj46ce"]
 
 [ext_resource type="Texture2D" uid="uid://bdivs16yl0bvq" path="res://icon.svg" id="1_1bt8a"]
 [ext_resource type="Script" path="res://scripts/player_movement/player.gd" id="1_6qrgc"]
@@ -19,6 +19,9 @@ size = Vector2(112, 125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_be8mk"]
 size = Vector2(119, 126)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgb52"]
+size = Vector2(90, 112)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 5
@@ -46,5 +49,12 @@ position_smoothing_enabled = true
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_be8mk")
 
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-1, 2)
+shape = SubResource("RectangleShape2D_bgb52")
+
 [connection signal="area_entered" from="LightDetection" to="." method="_on_light_detection_area_entered"]
 [connection signal="area_exited" from="LightDetection" to="." method="_on_light_detection_area_exited"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
