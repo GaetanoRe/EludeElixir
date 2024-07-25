@@ -43,3 +43,9 @@ func _on_light_detection_area_entered(area):
 func _on_light_detection_area_exited(area):
 	if(area.is_in_group("lights")):
 		print("Character has exited the light")
+
+
+# Use this function to deal with trap damage...
+func _on_hurt_box_area_entered(area):
+	if(area.is_in_group("traps")):
+		print("I have hit the trap!")
