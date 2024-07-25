@@ -32,6 +32,11 @@ func Physics_Update(delta: float):
 	player.move_and_slide()
 	
 	
+	
+	#example code for glide while holding spacebar
+	#while Input.is_physical_key_pressed(KEY_SPACE):
+		#gravity -= 300
+	
 	#example call for State change
 	#if direction.Input.get_vector("walk_left") == true:
 		#Transitioned.emit(self,"AlchemistLeft")
