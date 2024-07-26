@@ -4,12 +4,17 @@ class_name Player
 
 @export var current_level : Node2D
 @export var doses : int = 5
+@export var max_doses : int = 5
 @export var shadow : bool
+@export var user_interface : CanvasItem
 var gravity : float
+var gravity_default : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var speed : float
 var jumpVel : float = -500.0
 var playerVel : Vector2 = Vector2.ZERO
 var light_area : Area2D
+
+signal doses_changed
 
 
 
@@ -23,9 +28,11 @@ func _ready():
 # If player is not shadow and has at least 1 dose when pressing E,
 # they switch to shadow form for 15 seconds
 func _process(delta):
-	if Input.is_action_just_pressed("drink") and shadow == false and doses >= 1:
+	if Input.is_action_just_pressed("drink") and !shadow and doses >= 1:
 		doses -= 1
+		doses_changed.emit()
 		shadow = true
+		emit_signal("doses_changed", doses)
 		print("player is now Shadow")
 		await get_tree().create_timer(15.0).timeout
 		shadow = false
@@ -35,13 +42,14 @@ func _process(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	
 	playerVel = velocity
 
-	if shadow == false:
-		gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+	if (!shadow):
+		gravity = gravity_default
 		speed = 300
 	else:
-		gravity = ProjectSettings.get_setting("physics/2d/default_gravity") - 300
+		gravity = gravity_default / 2
 		speed = 350
 
 	var direction = Input.get_vector("walk_left", "walk_right", "jump", "crouch")

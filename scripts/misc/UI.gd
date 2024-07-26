@@ -3,22 +3,13 @@ class_name UI
 
 
 #@onready var doses = %Player.doses
-#var sprites = [
-	#"res://assets/sprites/user_interface/Potion_Bar_UI.png",
-	#"res://assets/sprites/user_interface/Potion_Bar_UI.png",
-	#"res://assets/sprites/user_interface/Potion_Bar_UI.png",
-	#"res://assets/sprites/user_interface/Potion_Bar_UI.png",
-	#"res://assets/sprites/user_interface/Potion_Bar_UI.png"
-	#]
+@onready var potion_prog : TextureProgressBar = get_node("Control/InGameUI/Potion")
+
+
+func _ready():
+	pass
+	
 #
-#func update_doses(doses):
-	#update_doses_sprite()
-#
-#
-#func update_doses_sprite():
-	#%Vial.texture = load(sprites[doses])   
-	# Select sprite with correct amount of doses. 
-	# Maybe create an array with each sprite, then index that with doses variable
 
 
 
