@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cr0me3aha5hml" path="res://assets/tilemaps/png/Rock Wall.png" id="4_txqtp"]
 [ext_resource type="PackedScene" uid="uid://dar2cn8cq053t" path="res://scenes/torch.tscn" id="4_ty7ci"]
 [ext_resource type="Texture2D" uid="uid://gxogxrg1fmrj" path="res://assets/tilemaps/png/Cave WaLL.png" id="5_17vwp"]
-[ext_resource type="PackedScene" uid="uid://bg13k54ch7yxi" path="res://scenes/platform.tscn" id="7_2dtjv"]
+[ext_resource type="PackedScene" path="res://scenes/platform.tscn" id="7_2dtjv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dr3nl"]
 texture = ExtResource("1_aetrt")

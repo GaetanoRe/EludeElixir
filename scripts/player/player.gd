@@ -38,6 +38,7 @@ func _process(delta):
 		emit_signal("doses_changed", doses)
 		print("player is now Shadow")
 		countdown_start.emit()
+		timer.start()
 		await timer.timeout
 		countdown_end.emit()
 		shadow = false
