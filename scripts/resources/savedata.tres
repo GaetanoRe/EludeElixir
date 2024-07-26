@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SaveGame" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/save_game.gd" id="1_pibb6"]
+
+[resource]
+script = ExtResource("1_pibb6")
+saved_Musictab = 7
+saved_SFXtab = 8
