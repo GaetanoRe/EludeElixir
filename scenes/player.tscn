@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://ky0t2odj46ce"]
+[gd_scene load_steps=19 format=3 uid="uid://ky0t2odj46ce"]
 
 [ext_resource type="Texture2D" uid="uid://bdivs16yl0bvq" path="res://icon.svg" id="1_1bt8a"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_6qrgc"]
+[ext_resource type="Texture2D" uid="uid://dfn2bf1em5p41" path="res://assets/sprites/Character/EE_Alchemist_SideR.png" id="2_gvkxl"]
 [ext_resource type="Script" path="res://scripts/player/states/StateMachine.gd" id="3_xqns0"]
 [ext_resource type="Script" path="res://scripts/player/states/alchemist_idle.gd" id="4_clq3u"]
 [ext_resource type="Script" path="res://scripts/player/states/alchemist_left.gd" id="5_8yla6"]
@@ -26,13 +27,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7cvdy"]
-size = Vector2(112, 125)
+size = Vector2(38, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_be8mk"]
-size = Vector2(119, 126)
+size = Vector2(38, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bgb52"]
-size = Vector2(90, 112)
+size = Vector2(38, 80)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 5
@@ -40,11 +41,16 @@ scale = Vector2(0.5, 0.5)
 collision_mask = 3
 script = ExtResource("1_6qrgc")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_gvkxl")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_e1efy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -0.5)
+position = Vector2(-1, 6)
 shape = SubResource("RectangleShape2D_7cvdy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -57,13 +63,13 @@ position_smoothing_enabled = true
 [node name="LightDetection" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LightDetection"]
-position = Vector2(-0.5, 0)
+position = Vector2(-1, 6)
 shape = SubResource("RectangleShape2D_be8mk")
 
 [node name="HurtBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(-1, 2)
+position = Vector2(-1, 6)
 shape = SubResource("RectangleShape2D_bgb52")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
