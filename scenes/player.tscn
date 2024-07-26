@@ -1,12 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://ky0t2odj46ce"]
+[gd_scene load_steps=17 format=3 uid="uid://ky0t2odj46ce"]
 
 [ext_resource type="Texture2D" uid="uid://bdivs16yl0bvq" path="res://icon.svg" id="1_1bt8a"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_6qrgc"]
-[ext_resource type="Texture2D" uid="uid://dfn2bf1em5p41" path="res://assets/sprites/Character/EE_Alchemist_SideR.png" id="2_gvkxl"]
+[ext_resource type="Texture2D" uid="uid://dfn2bf1em5p41" path="res://assets/sprites/character/EE_Alchemist_SideR.png" id="2_gvkxl"]
 [ext_resource type="Script" path="res://scripts/player/states/idle_state.gd" id="4_clq3u"]
 [ext_resource type="Script" path="res://scripts/player/states/walk_state.gd" id="6_ottbs"]
+[ext_resource type="Texture2D" uid="uid://cqlucy7fiqc1e" path="res://assets/sprites/user_interface/TimerWheelBehind.png" id="9_x1vi0"]
+[ext_resource type="Texture2D" uid="uid://c352slusx78a3" path="res://assets/sprites/user_interface/TimerWheel.png" id="10_lotf2"]
 [ext_resource type="Script" path="res://scripts/player/states/jump_state.gd" id="10_w36t2"]
 [ext_resource type="Script" path="res://scripts/player/states/fall_state.gd" id="11_esapv"]
+[ext_resource type="Texture2D" uid="uid://bhplxb7i3muyn" path="res://assets/sprites/user_interface/TimerWheelFilling.png" id="11_yj65o"]
+[ext_resource type="Script" path="res://scenes/TimerBar.gd" id="12_lshuk"]
 [ext_resource type="Script" path="res://scripts/player/states/glide_state.gd" id="13_lpmq5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e1efy"]
@@ -31,6 +35,7 @@ size = Vector2(38, 80)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 5
+texture_filter = 1
 scale = Vector2(0.5, 0.5)
 collision_mask = 3
 script = ExtResource("1_6qrgc")
@@ -82,6 +87,22 @@ script = ExtResource("11_esapv")
 
 [node name="GlideState" type="Node" parent="StateMachine"]
 script = ExtResource("13_lpmq5")
+
+[node name="TimerBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
+offset_left = -64.0
+offset_top = -32.0
+offset_right = -32.0
+max_value = 15.0
+value = 12.0
+fill_mode = 4
+texture_under = ExtResource("9_x1vi0")
+texture_over = ExtResource("10_lotf2")
+texture_progress = ExtResource("11_yj65o")
+script = ExtResource("12_lshuk")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
 
 [connection signal="area_entered" from="LightDetection" to="." method="_on_light_detection_area_entered"]
 [connection signal="area_exited" from="LightDetection" to="." method="_on_light_detection_area_exited"]

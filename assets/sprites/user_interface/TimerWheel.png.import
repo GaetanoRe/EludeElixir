@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfn2bf1em5p41"
-path="res://.godot/imported/EE_Alchemist_SideR.png-761f64a6359173af02c3955dfb6ae441.ctex"
+uid="uid://c352slusx78a3"
+path="res://.godot/imported/TimerWheel.png-1020d22c68d062e18895eaf8ac8d8dea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/character/EE_Alchemist_SideR.png"
-dest_files=["res://.godot/imported/EE_Alchemist_SideR.png-761f64a6359173af02c3955dfb6ae441.ctex"]
+source_file="res://assets/sprites/user_interface/TimerWheel.png"
+dest_files=["res://.godot/imported/TimerWheel.png-1020d22c68d062e18895eaf8ac8d8dea.ctex"]
 
 [params]
 

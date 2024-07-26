@@ -7,6 +7,7 @@ class_name Player
 @export var max_doses : int = 5
 @export var shadow : bool
 @export var user_interface : CanvasItem
+var timer : Timer
 var gravity : float
 var gravity_default : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var speed : float
@@ -15,13 +16,15 @@ var playerVel : Vector2 = Vector2.ZERO
 var light_area : Area2D
 
 signal doses_changed
-
+signal countdown_start
+signal countdown_end
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	light_area = get_node("LightDetection")
 	shadow = false
+	timer = get_node("Timer")
 
 
 
@@ -34,7 +37,10 @@ func _process(delta):
 		shadow = true
 		emit_signal("doses_changed", doses)
 		print("player is now Shadow")
-		await get_tree().create_timer(15.0).timeout
+		countdown_start.emit()
+		timer.start()
+		await timer.timeout
+		countdown_end.emit()
 		shadow = false
 		print("player is now Alchemist")
 
