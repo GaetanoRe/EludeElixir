@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bdivs16yl0bvq" path="res://icon.svg" id="1_1bt8a"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_6qrgc"]
-[ext_resource type="Texture2D" uid="uid://dfn2bf1em5p41" path="res://assets/sprites/Character/EE_Alchemist_SideR.png" id="2_gvkxl"]
+[ext_resource type="Texture2D" uid="uid://dfn2bf1em5p41" path="res://assets/sprites/character/EE_Alchemist_SideR.png" id="2_gvkxl"]
 [ext_resource type="Script" path="res://scripts/player/states/idle_state.gd" id="4_clq3u"]
 [ext_resource type="Script" path="res://scripts/player/states/walk_state.gd" id="6_ottbs"]
 [ext_resource type="Texture2D" uid="uid://cqlucy7fiqc1e" path="res://assets/sprites/user_interface/TimerWheelBehind.png" id="9_x1vi0"]
@@ -89,13 +89,12 @@ script = ExtResource("11_esapv")
 script = ExtResource("13_lpmq5")
 
 [node name="TimerBar" type="TextureProgressBar" parent="."]
-visible = false
 texture_filter = 1
 offset_left = -64.0
 offset_top = -32.0
 offset_right = -32.0
 max_value = 15.0
-value = 13.0
+value = 12.0
 fill_mode = 4
 texture_under = ExtResource("9_x1vi0")
 texture_over = ExtResource("10_lotf2")
