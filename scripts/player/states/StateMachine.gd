@@ -1,5 +1,7 @@
 extends Node
 
+#    THIS SCRIPT NOT ATTACHED TO STATE MACHINE - MOVEMENT CODE IN PLAYER.GD
+
 @export var initial_state: State
 
 var current_state: State

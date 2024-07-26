@@ -1,9 +1,11 @@
 extends State
-class_name AlchemistRight
+class_name GlideState
 
 var player: CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var shadow_gravity = ProjectSettings.get_setting("physics/2d/default_gravity") - 300
 @export var speed : float = 300.0
+@export var shadow_speed : float = 350.0
 @export var jumpVel : float = -500.0
 @export var Vel : Vector2 = Vector2.ZERO
 
@@ -11,6 +13,17 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func Enter():
 	player = get_tree().get_first_node_in_group("Player")
+
+
+func Update(_delta: float):
+	if Input.is_action_just_pressed("jump") and player.is_on_floor() == false:
+		Transitioned.emit(self,"JumpState")
+	if player.velocity.y > 0:
+		Transitioned.emit(self,"FallState")
+	if player.velocity.x == 0 and player.velocity.y == 0:
+		Transitioned.emit(self,"IdleState")
+	if player.velocity.x != 0 and player.velocity.y == 0 and player.is_on_floor():
+		Transitioned.emit(self,"WalkState")
 
 
 func Physics_Update(delta: float):
@@ -30,8 +43,3 @@ func Physics_Update(delta: float):
 	
 	player.velocity = Vel
 	player.move_and_slide()
-	
-	
-	#example call for State change
-	#if direction.Input.get_vector("walk_left") == true:
-		#Transitioned.emit(self,"AlchemistLeft")
