@@ -1,6 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://ba51p6hctw0ao"]
+[gd_scene load_steps=31 format=3 uid="uid://ba51p6hctw0ao"]
 
 [ext_resource type="Texture2D" uid="uid://be026708splmq" path="res://assets/tilemaps/png/DarkBlueBrickTileset.png" id="1_aetrt"]
+[ext_resource type="Script" path="res://scripts/levels/level_Demo.gd" id="1_xxchd"]
 [ext_resource type="Texture2D" uid="uid://c0mrnsllqtpuc" path="res://assets/tilemaps/png/StoneTIlesetGradient.png" id="2_jq6g2"]
 [ext_resource type="PackedScene" uid="uid://ky0t2odj46ce" path="res://scenes/player.tscn" id="3_pfwmd"]
 [ext_resource type="Texture2D" uid="uid://dql56kiwaugna" path="res://assets/tilemaps/png/Floor tile.png" id="3_qewob"]
@@ -469,13 +470,10 @@ _data = {
 "diagonal": SubResource("Animation_oieyl")
 }
 
-[node name="Main" type="Node2D"]
+[node name="level_Demo" type="Node2D"]
 texture_filter = 1
 position = Vector2(1, 0)
-
-[node name="Dungeon Music" type="AudioStreamPlayer" parent="."]
-
-[node name="Sound Effects" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("1_xxchd")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -491,8 +489,10 @@ offset_right = 6778.0
 offset_bottom = -94.0
 text = "This way to Light -->"
 
-[node name="Player" parent="." instance=ExtResource("3_pfwmd")]
+[node name="Player" parent="." node_paths=PackedStringArray("current_level") instance=ExtResource("3_pfwmd")]
+unique_name_in_owner = true
 position = Vector2(158, 97)
+current_level = NodePath("..")
 
 [node name="Platform" parent="." instance=ExtResource("7_2dtjv")]
 position = Vector2(1148, 68)

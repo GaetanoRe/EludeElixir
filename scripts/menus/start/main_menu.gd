@@ -1,9 +1,21 @@
 extends Control
 
+var volume_db = [-80, -30, -23, -16, -12, -9, -8, -6, -5, -4.3, -2.8, -1.6, -1, -0.5, 0]
+var bus_Music: int
+var bus_SFX: int
+var Musictab: int
+var SFXtab: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	bus_Music = AudioServer.get_bus_index("Music")
+	bus_SFX = AudioServer.get_bus_index("SoundEffects")
+	var saved_data := load("res://scripts/resources/savedata.tres") as SaveGame
+	if saved_data != null:
+		Musictab = saved_data.saved_Musictab
+		SFXtab = saved_data.saved_SFXtab
+	AudioServer.set_bus_volume_db(bus_Music, volume_db[Musictab])
+	AudioServer.set_bus_volume_db(bus_SFX, volume_db[SFXtab])
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -14,7 +26,7 @@ func _process(delta):
 
 func _on_start_game_button_pressed():
 	SoundFx.button_click()
-	var next_scene = load("res://scenes/main.tscn")
+	var next_scene = load("res://scenes/dungeon.tscn")
 	get_tree().change_scene_to_packed(next_scene)
 
 
