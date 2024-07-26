@@ -2,8 +2,7 @@ extends State
 class_name WalkState
 
 var player: CharacterBody2D
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var shadow_gravity = ProjectSettings.get_setting("physics/2d/default_gravity") - 300
+@export var gravity : float
 @export var speed : float = 300.0
 @export var shadow_speed : float = 350.0
 @export var jumpVel : float = -500.0
@@ -32,6 +31,11 @@ func Update(_delta: float):
 
 func Physics_Update(delta: float):
 	Vel = player.velocity
+	
+	if player.shadow == false:
+		gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+	else:
+		gravity = ProjectSettings.get_setting("physics/2d/default_gravity") - 300
 	
 	var direction = Input.get_vector("walk_left", "walk_right", "jump", "crouch")
 	if(direction.x != 0):

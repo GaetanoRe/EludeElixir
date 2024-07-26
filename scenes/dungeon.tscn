@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuobvows34x5g"]
+
+[ext_resource type="PackedScene" uid="uid://b6gs3mjn2hh6s" path="res://scenes/UI.tscn" id="1_ipcx5"]
+[ext_resource type="PackedScene" uid="uid://ba51p6hctw0ao" path="res://scenes/level_Demo.tscn" id="2_8mtic"]
+
+[node name="Dungeon" type="Node2D"]
+
+[node name="Dungeon Music" type="AudioStreamPlayer" parent="."]
+
+[node name="Sound Effects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="LevelDemo" parent="." instance=ExtResource("2_8mtic")]
+
+[node name="UserInterface" parent="." instance=ExtResource("1_ipcx5")]
+unique_name_in_owner = true
