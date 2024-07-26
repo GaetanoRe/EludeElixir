@@ -6,10 +6,11 @@ class_name Player
 #var jumpVel : float = -500.0
 #var playerVel : Vector2 = Vector2.ZERO
 var light_area : Area2D
-
+@export var shadow : bool
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	light_area = get_node("LightDetection")
+	shadow = false
 	pass # Replace with function body.
 
 # Movement mechanics are now in player state scripts
@@ -33,7 +34,8 @@ func _ready():
 	#velocity = playerVel
 	#move_and_slide()
 
-
+func is_shadow() -> bool:
+	return shadow
 
 func _on_light_detection_area_entered(area):
 	if(area.is_in_group("lights")):

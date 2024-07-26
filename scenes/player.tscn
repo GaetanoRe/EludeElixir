@@ -1,18 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://ky0t2odj46ce"]
+[gd_scene load_steps=12 format=3 uid="uid://ky0t2odj46ce"]
 
 [ext_resource type="Texture2D" uid="uid://bdivs16yl0bvq" path="res://icon.svg" id="1_1bt8a"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_6qrgc"]
 [ext_resource type="Script" path="res://scripts/player/states/StateMachine.gd" id="3_xqns0"]
-[ext_resource type="Script" path="res://scripts/player/states/alchemist_idle.gd" id="4_clq3u"]
-[ext_resource type="Script" path="res://scripts/player/states/alchemist_left.gd" id="5_8yla6"]
-[ext_resource type="Script" path="res://scripts/player/states/alchemist_right.gd" id="6_ottbs"]
-[ext_resource type="Script" path="res://scripts/player/states/shadow_idle.gd" id="7_stk7f"]
-[ext_resource type="Script" path="res://scripts/player/states/shadow_right.gd" id="8_ibjoa"]
-[ext_resource type="Script" path="res://scripts/player/states/shadow_left.gd" id="9_6afd4"]
-[ext_resource type="Script" path="res://scripts/player/states/alchemist_jump.gd" id="10_w36t2"]
-[ext_resource type="Script" path="res://scripts/player/states/alchemist_fall.gd" id="11_esapv"]
-[ext_resource type="Script" path="res://scripts/player/states/shadow_jump.gd" id="12_14565"]
-[ext_resource type="Script" path="res://scripts/player/states/shadow_glide.gd" id="13_lpmq5"]
+[ext_resource type="Script" path="res://scripts/player/states/idle_state.gd" id="14_s6ugi"]
+[ext_resource type="Script" path="res://scripts/player/states/walk_state.gd" id="15_af161"]
+[ext_resource type="Script" path="res://scripts/player/states/jump_state.gd" id="16_gh6kj"]
+[ext_resource type="Script" path="res://scripts/player/states/fall_state.gd" id="17_bkcv0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e1efy"]
 animations = [{
@@ -68,37 +62,19 @@ shape = SubResource("RectangleShape2D_bgb52")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_xqns0")
-initial_state = NodePath("AlchemistIdle")
+initial_state = NodePath("IdleState")
 
-[node name="AlchemistIdle" type="Node" parent="StateMachine"]
-script = ExtResource("4_clq3u")
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("14_s6ugi")
 
-[node name="AlchemistLeft" type="Node" parent="StateMachine"]
-script = ExtResource("5_8yla6")
+[node name="WalkState" type="Node" parent="StateMachine"]
+script = ExtResource("15_af161")
 
-[node name="AlchemistRight" type="Node" parent="StateMachine"]
-script = ExtResource("6_ottbs")
+[node name="JumpState" type="Node" parent="StateMachine"]
+script = ExtResource("16_gh6kj")
 
-[node name="ShadowIdle" type="Node" parent="StateMachine"]
-script = ExtResource("7_stk7f")
-
-[node name="ShadowRight" type="Node" parent="StateMachine"]
-script = ExtResource("8_ibjoa")
-
-[node name="ShadowLeft" type="Node" parent="StateMachine"]
-script = ExtResource("9_6afd4")
-
-[node name="AlchemistJump" type="Node" parent="StateMachine"]
-script = ExtResource("10_w36t2")
-
-[node name="AlchemistFall" type="Node" parent="StateMachine"]
-script = ExtResource("11_esapv")
-
-[node name="ShadowJump" type="Node" parent="StateMachine"]
-script = ExtResource("12_14565")
-
-[node name="ShadowGlide" type="Node" parent="StateMachine"]
-script = ExtResource("13_lpmq5")
+[node name="FallState" type="Node" parent="StateMachine"]
+script = ExtResource("17_bkcv0")
 
 [connection signal="area_entered" from="LightDetection" to="." method="_on_light_detection_area_entered"]
 [connection signal="area_exited" from="LightDetection" to="." method="_on_light_detection_area_exited"]
