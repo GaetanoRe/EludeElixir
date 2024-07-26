@@ -21,7 +21,7 @@ SoundFx="*res://scenes/sound_fx.tscn"
 
 [display]
 
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
