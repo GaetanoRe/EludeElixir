@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bg13k54ch7yxi" path="res://scenes/platform.tscn" id="7_2dtjv"]
 [ext_resource type="PackedScene" uid="uid://dy6saxpenioit" path="res://scenes/spike.tscn" id="10_jye4v"]
 [ext_resource type="Texture2D" uid="uid://bmox4umbo6ypc" path="res://assets/sprites/background/EE_TEST_Background.png" id="11_5g12o"]
-[ext_resource type="PackedScene" path="res://scenes/alembic.tscn" id="12_hdrj1"]
+[ext_resource type="PackedScene" uid="uid://cflgp42sj1api" path="res://scenes/alembic.tscn" id="12_hdrj1"]
 [ext_resource type="PackedScene" uid="uid://bq4jk4ple7321" path="res://scenes/shadow_rect.tscn" id="13_2h6io"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dr3nl"]
@@ -366,7 +366,7 @@ _data = {
 "diagonal": SubResource("Animation_oieyl")
 }
 
-[node name="level_Demo" type="Node2D"]
+[node name="LevelDemo" type="Node2D"]
 texture_filter = 1
 position = Vector2(1, 0)
 script = ExtResource("1_xxchd")
@@ -645,6 +645,8 @@ position = Vector2(9162, -405)
 [node name="Alembic2" parent="." instance=ExtResource("12_hdrj1")]
 position = Vector2(4168, 172)
 
-[node name="ShadowRect" parent="." instance=ExtResource("13_2h6io")]
+[node name="DarknessRect" parent="." instance=ExtResource("13_2h6io")]
 position = Vector2(680, 71)
 scale = Vector2(0.82277, 1.66317)
+
+[connection signal="area_entered" from="DarknessRect" to="Player" method="_on_darkness_rect_area_entered"]

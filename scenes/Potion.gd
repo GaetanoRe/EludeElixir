@@ -1,4 +1,5 @@
 extends TextureProgressBar
+class_name Potion
 
 @onready var max_doses : int = 5
 @onready var player : Player

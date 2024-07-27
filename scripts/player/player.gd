@@ -6,7 +6,6 @@ class_name Player
 @export var doses : int = 5
 @export var max_doses : int = 5
 @export var shadow : bool
-@export var user_interface : CanvasItem
 var timer : Timer
 var gravity : float
 var gravity_default : float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -14,6 +13,7 @@ var speed : float
 var jumpVel : float = -500.0
 var playerVel : Vector2 = Vector2.ZERO
 var light_area : Area2D
+
 
 signal doses_changed
 signal countdown_start
@@ -78,8 +78,20 @@ func _physics_process(delta):
 func _on_light_detection_area_entered(area):
 	if(area.is_in_group("lights")):
 		print("Character is touching light")
+		
 	elif(area.is_in_group("dark_area") && !shadow):
 		print("Uh oh! you stepped into the dark area!")
+		#%Enveloped_UI.is_visible_in_tree(true)
+		##UserInterface.enveloped_anim()       <- 2nd option - See UserInterface.gd
+		#print("Uh oh! You've been Enveloped!")
+		#countdown_start.emit()
+		#timer.start()
+		#await timer.timeout
+		#countdown_end.emit()
+		var next_scene = load("res://scenes/dungeon.tscn")
+		get_tree().change_scene_to_packed(next_scene)
+	else:
+		return
 
 
 func _on_light_detection_area_exited(area):
@@ -91,5 +103,4 @@ func _on_light_detection_area_exited(area):
 func _on_hurt_box_area_entered(area):
 	if(area.is_in_group("traps")):
 		print("I have hit the trap!")
-
 
