@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ky0t2odj46ce"]
+[gd_scene load_steps=18 format=3 uid="uid://ky0t2odj46ce"]
 
 [ext_resource type="Texture2D" uid="uid://bdivs16yl0bvq" path="res://icon.svg" id="1_1bt8a"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_6qrgc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/player/states/fall_state.gd" id="11_esapv"]
 [ext_resource type="Texture2D" uid="uid://bhplxb7i3muyn" path="res://assets/sprites/user_interface/TimerWheelFilling.png" id="11_yj65o"]
 [ext_resource type="Script" path="res://scenes/TimerBar.gd" id="12_lshuk"]
+[ext_resource type="PackedScene" uid="uid://cl4s2w48roiwc" path="res://scenes/scene_trans_anim.tscn" id="13_5ip57"]
 [ext_resource type="Script" path="res://scripts/player/states/glide_state.gd" id="13_lpmq5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e1efy"]
@@ -103,6 +104,9 @@ script = ExtResource("12_lshuk")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 15.0
+
+[node name="SceneTransAnim" parent="." instance=ExtResource("13_5ip57")]
+visible = false
 
 [connection signal="area_entered" from="LightDetection" to="." method="_on_light_detection_area_entered"]
 [connection signal="area_exited" from="LightDetection" to="." method="_on_light_detection_area_exited"]

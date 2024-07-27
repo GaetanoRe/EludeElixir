@@ -2,6 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 
+@onready var transition = $SceneTransAnim/CanvasLayer/AnimationPlayer
+@onready var transition_mask = $SceneTransAnim/CanvasLayer/ColorRect
 @export var current_level : Node2D
 @export var doses : int = 5
 @export var max_doses : int = 5
@@ -78,18 +80,15 @@ func _physics_process(delta):
 func _on_light_detection_area_entered(area):
 	if(area.is_in_group("lights")):
 		print("Character is touching light")
-		
+	
 	elif(area.is_in_group("dark_area") && !shadow):
 		print("Uh oh! you stepped into the dark area!")
-		#%Enveloped_UI.is_visible_in_tree(true)
-		##UserInterface.enveloped_anim()       <- 2nd option - See UserInterface.gd
-		#print("Uh oh! You've been Enveloped!")
-		#countdown_start.emit()
-		#timer.start()
-		#await timer.timeout
-		#countdown_end.emit()
+		transition.play("Enveloped")
+		await get_tree().create_timer(4.5).timeout
+		transition_mask.color.a = 255
 		var next_scene = load("res://scenes/dungeon.tscn")
 		get_tree().change_scene_to_packed(next_scene)
+	
 	else:
 		return
 
