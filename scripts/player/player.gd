@@ -78,6 +78,8 @@ func _physics_process(delta):
 func _on_light_detection_area_entered(area):
 	if(area.is_in_group("lights")):
 		print("Character is touching light")
+	elif(area.is_in_group("dark_area") && !shadow):
+		print("Uh oh! you stepped into the dark area!")
 
 
 func _on_light_detection_area_exited(area):
