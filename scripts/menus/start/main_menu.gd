@@ -30,7 +30,6 @@ func _process(delta):
 
 func _on_start_game_button_pressed():
 	SoundFx.button_click()
-	transition_mask.color.a = 0
 	transition.play("FadeOut")
 	await get_tree().create_timer(1).timeout
 	var next_scene = load("res://scenes/dungeon.tscn")

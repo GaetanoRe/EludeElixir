@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://g8jvc2c5qrvd"]
+[gd_scene load_steps=8 format=3 uid="uid://g8jvc2c5qrvd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rgo6r"]
 font_size = 50
@@ -164,11 +164,40 @@ tracks/3/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_a6xi0"]
+resource_name = "LoadScene"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kqg23"]
 _data = {
 "Enveloped": SubResource("Animation_p3bdg"),
 "FadeIn": SubResource("Animation_ocom3"),
 "FadeOut": SubResource("Animation_5c26n"),
+"LoadScene": SubResource("Animation_a6xi0"),
 "RESET": SubResource("Animation_7wm1k")
 }
 
@@ -183,7 +212,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Enveloped_text" type="Label" parent="CanvasLayer"]
@@ -197,6 +226,7 @@ label_settings = SubResource("LabelSettings_rgo6r")
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+reset_on_save = false
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_kqg23")

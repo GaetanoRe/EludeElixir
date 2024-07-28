@@ -134,11 +134,11 @@ scale = Vector2(5, 5)
 pivot_offset = Vector2(0, 62)
 
 [node name="Potion" type="TextureProgressBar" parent="Control/InGameUI"]
+modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-value = 100.0
 fill_mode = 3
 texture_under = ExtResource("2_jn74y")
 texture_over = ExtResource("1_gq1it")
@@ -147,6 +147,7 @@ texture_progress_offset = Vector2(28, 16)
 script = ExtResource("5_8n76n")
 
 [node name="UI_AnimPlayer" type="AnimationPlayer" parent="Control/InGameUI"]
+reset_on_save = false
 root_node = NodePath("../../../..")
 libraries = {
 "": SubResource("AnimationLibrary_us501")
