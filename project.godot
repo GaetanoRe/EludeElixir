@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 SoundFx="*res://scenes/sound_fx.tscn"
-UserInterface="*res://scripts/misc/UserInterface.gd"
 
 [display]
 

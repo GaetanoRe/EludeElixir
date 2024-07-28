@@ -2,12 +2,11 @@ extends CharacterBody2D
 class_name Player
 
 
-@onready var transition = $SceneTransAnim/CanvasLayer/AnimationPlayer
-@onready var transition_mask = $SceneTransAnim/CanvasLayer/ColorRect
 @export var current_level : Node2D
 @export var doses : int = 5
 @export var max_doses : int = 5
 @export var shadow : bool
+@export var user_interface : CanvasItem
 var timer : Timer
 var gravity : float
 var gravity_default : float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -15,7 +14,6 @@ var speed : float
 var jumpVel : float = -500.0
 var playerVel : Vector2 = Vector2.ZERO
 var light_area : Area2D
-
 
 signal doses_changed
 signal countdown_start
@@ -80,17 +78,8 @@ func _physics_process(delta):
 func _on_light_detection_area_entered(area):
 	if(area.is_in_group("lights")):
 		print("Character is touching light")
-	
 	elif(area.is_in_group("dark_area") && !shadow):
 		print("Uh oh! you stepped into the dark area!")
-		transition.play("Enveloped")
-		await get_tree().create_timer(4.5).timeout
-		transition_mask.color.a = 255
-		var next_scene = load("res://scenes/dungeon.tscn")
-		get_tree().change_scene_to_packed(next_scene)
-	
-	else:
-		return
 
 
 func _on_light_detection_area_exited(area):
@@ -102,4 +91,5 @@ func _on_light_detection_area_exited(area):
 func _on_hurt_box_area_entered(area):
 	if(area.is_in_group("traps")):
 		print("I have hit the trap!")
+
 
