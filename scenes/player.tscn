@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://ky0t2odj46ce"]
+[gd_scene load_steps=72 format=3 uid="uid://ky0t2odj46ce"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_6qrgc"]
 [ext_resource type="Texture2D" uid="uid://dfn2bf1em5p41" path="res://assets/sprites/Character/EE_Alchemist_SideR.png" id="2_gvkxl"]
@@ -153,6 +153,18 @@ region = Rect2(192, 0, 32, 32)
 atlas = ExtResource("8_m6c1w")
 region = Rect2(224, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfte2"]
+atlas = ExtResource("7_pl1gr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b535b"]
+atlas = ExtResource("7_pl1gr")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnil5"]
+atlas = ExtResource("7_pl1gr")
+region = Rect2(64, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_8sxmm"]
 atlas = ExtResource("7_pl1gr")
 region = Rect2(0, 0, 32, 32)
@@ -168,10 +180,6 @@ region = Rect2(64, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmn56"]
 atlas = ExtResource("8_m6c1w")
 region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ukh0y"]
-atlas = ExtResource("8_m6c1w")
-region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h7lpw"]
 atlas = ExtResource("8_m6c1w")
@@ -284,31 +292,31 @@ animations = [{
 "speed": 10.0
 }, {
 "frames": [{
-"duration": 2.0,
+"duration": 15.0,
 "texture": SubResource("AtlasTexture_1uk11")
 }, {
-"duration": 2.0,
+"duration": 2.5,
 "texture": SubResource("AtlasTexture_5rnvt")
 }, {
-"duration": 2.0,
+"duration": 2.5,
 "texture": SubResource("AtlasTexture_ak0jt")
 }, {
-"duration": 2.0,
+"duration": 2.5,
 "texture": SubResource("AtlasTexture_82am8")
 }, {
-"duration": 2.0,
+"duration": 2.5,
 "texture": SubResource("AtlasTexture_4y3pl")
 }, {
-"duration": 2.0,
+"duration": 2.5,
 "texture": SubResource("AtlasTexture_0urir")
 }, {
-"duration": 2.0,
+"duration": 2.5,
 "texture": SubResource("AtlasTexture_d4mrb")
 }, {
-"duration": 2.0,
+"duration": 2.5,
 "texture": SubResource("AtlasTexture_7jqxj")
 }, {
-"duration": 2.0,
+"duration": 2.5,
 "texture": SubResource("AtlasTexture_g1bh1")
 }, {
 "duration": 2.0,
@@ -328,8 +336,22 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cy4vb")
 }],
-"loop": false,
+"loop": true,
 "name": &"Shadow_Fall",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfte2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b535b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnil5")
+}],
+"loop": true,
+"name": &"Shadow_Glide",
 "speed": 10.0
 }, {
 "frames": [{
@@ -349,9 +371,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vmn56")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ukh0y")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h7lpw")
@@ -459,6 +478,7 @@ texture_filter = 1
 offset_left = -64.0
 offset_top = -32.0
 offset_right = -32.0
+scale = Vector2(0.8, 0.8)
 max_value = 15.0
 value = 12.0
 fill_mode = 4
