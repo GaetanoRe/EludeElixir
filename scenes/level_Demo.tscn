@@ -367,9 +367,6 @@ _data = {
 "diagonal": SubResource("Animation_oieyl")
 }
 
-
-[node name="LevelDemo" type="Node2D"]
-
 [sub_resource type="Animation" id="Animation_cfknc"]
 resource_name = "spikewall"
 length = 1.5
@@ -523,7 +520,6 @@ _data = {
 }
 
 [node name="level_Demo" type="Node2D"]
-
 texture_filter = 1
 position = Vector2(1, 0)
 script = ExtResource("1_xxchd")
@@ -817,12 +813,9 @@ position = Vector2(9162, -405)
 [node name="Alembic2" parent="." instance=ExtResource("12_hdrj1")]
 position = Vector2(4168, 172)
 
-[node name="DarknessRect" parent="." instance=ExtResource("13_2h6io")]
+[node name="ShadowRect" parent="." instance=ExtResource("13_2h6io")]
 position = Vector2(680, 71)
 scale = Vector2(0.82277, 1.66317)
-
-
-[connection signal="area_entered" from="DarknessRect" to="Player" method="_on_darkness_rect_area_entered"]
 
 [node name="Spikewall" parent="." instance=ExtResource("14_wh5vq")]
 position = Vector2(11704, 687)
