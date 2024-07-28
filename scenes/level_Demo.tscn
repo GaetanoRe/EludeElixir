@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dy6saxpenioit" path="res://scenes/spike.tscn" id="10_jye4v"]
 [ext_resource type="Texture2D" uid="uid://bmox4umbo6ypc" path="res://assets/sprites/background/EE_TEST_Background.png" id="11_5g12o"]
 [ext_resource type="PackedScene" uid="uid://cflgp42sj1api" path="res://scenes/alembic.tscn" id="12_hdrj1"]
-[ext_resource type="PackedScene" uid="uid://bq4jk4ple7321" path="res://scenes/shadow_rect.tscn" id="13_2h6io"]
+[ext_resource type="PackedScene" uid="uid://bq4jk4ple7321" path="res://scenes/darkness_rect.tscn" id="13_2h6io"]
 [ext_resource type="PackedScene" uid="uid://pnh2bn8moj5j" path="res://scenes/spikewall.tscn" id="14_wh5vq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dr3nl"]

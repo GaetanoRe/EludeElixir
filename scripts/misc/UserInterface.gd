@@ -1,6 +1,5 @@
 extends CanvasLayer
-class_name UI
-
+class_name UserInterface
 
 #@onready var doses = %Player.doses
 @onready var potion_prog : TextureProgressBar = get_node("Control/InGameUI/Potion")
