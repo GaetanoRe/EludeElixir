@@ -52,6 +52,7 @@ func _process(delta):
 		print("player is now Alchemist")
 
 
+
 	#   Alchemist Animation
 	#if Input.is_action_just_pressed("jump") and is_on_floor() and enveloped == false:
 		#animation.play("Alchemist_Jump")
