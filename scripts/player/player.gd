@@ -7,7 +7,7 @@ class_name Player
 @export var doses : int = 5
 @export var max_doses : int = 5
 @export var shadow : bool
-@export var user_interface : CanvasItem
+@export var enveloped : bool
 var timer : Timer
 var gravity : float
 var gravity_default : float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -23,8 +23,9 @@ signal countdown_end
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	light_area = get_node("LightDetection")
+	enveloped = false
 	shadow = false
+	light_area = get_node("LightDetection")
 	timer = get_node("Timer")
 
 
@@ -32,11 +33,11 @@ func _ready():
 # If player is not shadow and has at least 1 dose when pressing E,
 # they switch to shadow form for 15 seconds
 func _process(delta):
-	if Input.is_action_just_pressed("drink") and !shadow and doses >= 1:
+	if Input.is_action_just_pressed("drink") and !shadow and !enveloped and doses >= 1:
 		doses -= 1
 		doses_changed.emit()
 		shadow = true
-		emit_signal("doses_changed", doses)
+		#emit_signal("doses_changed", doses)    <- Not needed? Already have doses_changed.emit() above
 		print("player is now Shadow")
 		countdown_start.emit()
 		timer.start()
@@ -79,7 +80,10 @@ func _physics_process(delta):
 func _on_light_detection_area_entered(area):
 	if(area.is_in_group("lights")):
 		print("Character is touching light")
+	
 	elif(area.is_in_group("dark_area") && !shadow):
+		print("Uh oh! You've been Enveloped!")
+		enveloped = true
 		transition.play("Enveloped")
 		await get_tree().create_timer(4.5).timeout
 		transition_mask.color.a = 255
@@ -96,5 +100,4 @@ func _on_light_detection_area_exited(area):
 func _on_hurt_box_area_entered(area):
 	if(area.is_in_group("traps")):
 		print("I have hit the trap!")
-
 

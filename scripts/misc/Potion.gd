@@ -11,8 +11,8 @@ func _ready():
 
 func update_doses():
 	value -= (100 / player.max_doses)
-#
-#
+
+
 
 func update_max_doses(num):
 	max_doses = num
