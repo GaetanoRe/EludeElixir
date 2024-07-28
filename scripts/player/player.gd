@@ -24,14 +24,14 @@ signal countdown_end
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	transition.play("FadeIn")
+	UI_anim.play("UI_Fade_In")
+	animation.play("Alchemist_Idle")
 	enveloped = false
 	shadow = false
 	light_area = get_node("LightDetection")
 	timer = get_node("Timer")
-	UI_anim.play("UI_Fade_In")
-	transition.play("FadeIn")
-	animation.play("Alchemist_Idle")
-	
+
 
 
 
@@ -138,11 +138,10 @@ func _process(delta):
 			animation.set_frame_and_progress(current_frame, current_progress)
 		if velocity.x == 0 and velocity.y == 0:
 			animation.play("Shadow_Idle")
-	
-	# While loop might break game. Try using a Timer instead
-	# Include condition to not reset to 0 if timer is already running
-	#while Input.is_action_pressed("jump") and !is_on_floor():
-		#animation.play("Shadow_Glide")
+		# While loop might break game. Try using a Timer instead
+		# Include condition to not reset to 0 if timer is already running
+		#while Input.is_action_pressed("jump") and !is_on_floor():
+			#animation.play("Shadow_Glide")
 	
 	#   Prevent weird behavior - Shadow
 	if !Input.is_action_pressed("jump") and velocity.x > 0 and velocity.y == 0 and is_on_floor() and shadow == true:
@@ -159,7 +158,10 @@ func _process(delta):
 
 	#   Enveloped Animations
 	if Input.is_action_pressed("jump") and is_on_floor() and enveloped == true:
-		animation.play("Enveloped_Idle")
+		var current_frame = animation.get_frame()
+		var current_progress = animation.get_frame_progress()
+		animation.play("Enveloped")
+		animation.set_frame_and_progress(current_frame, current_progress)
 	
 	#   Mid-Air - Enveloped
 	if !is_on_floor() and enveloped == true:
@@ -167,29 +169,28 @@ func _process(delta):
 			animation.flip_h = false
 			var current_frame = animation.get_frame()
 			var current_progress = animation.get_frame_progress()
-			animation.play("Enveloped_Run")
+			animation.play("Enveloped")
 			animation.set_frame_and_progress(current_frame, current_progress)
 		if velocity.x < 0:
 			animation.flip_h = true
 			var current_frame = animation.get_frame()
 			var current_progress = animation.get_frame_progress()
-			animation.play("Enveloped_Run")
-			animation.set_frame_and_progress(current_frame, current_progress)
-		if velocity.x == 0:
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Enveloped_Idle")
+			animation.play("Enveloped")
 			animation.set_frame_and_progress(current_frame, current_progress)
 	
 	#   Prevent weird behavior - Enveloped
 	if !Input.is_action_pressed("jump") and velocity.x > 0 and is_on_floor() and enveloped == true:
 		animation.flip_h = false
-		animation.play("Enveloped_Run")
+		var current_frame = animation.get_frame()
+		var current_progress = animation.get_frame_progress()
+		animation.play("Enveloped")
+		animation.set_frame_and_progress(current_frame, current_progress)
 	if !Input.is_action_pressed("jump") and velocity.x < 0 and is_on_floor() and enveloped == true:
 		animation.flip_h = true
-		animation.play("Enveloped_Run")
-	if !Input.is_action_pressed("jump") and velocity.x == 0 and enveloped == true:
-		animation.play("Enveloped_Idle")
+		var current_frame = animation.get_frame()
+		var current_progress = animation.get_frame_progress()
+		animation.play("Enveloped")
+		animation.set_frame_and_progress(current_frame, current_progress)
 
 
 

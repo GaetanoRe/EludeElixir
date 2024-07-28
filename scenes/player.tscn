@@ -318,7 +318,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_de2xv")
 }],
 "loop": false,
-"name": &"Enveloped_Run",
+"name": &"Enveloped",
 "speed": 10.0
 }, {
 "frames": [{
@@ -408,7 +408,7 @@ texture = ExtResource("2_gvkxl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_e1efy")
-animation = &"Shadow_Run"
+animation = &"Enveloped"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -471,6 +471,7 @@ script = ExtResource("12_lshuk")
 wait_time = 15.0
 
 [node name="SceneTransAnim" parent="." instance=ExtResource("13_5ip57")]
+visible = false
 
 [node name="UserInterface" parent="." instance=ExtResource("15_us04i")]
 
