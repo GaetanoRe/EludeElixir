@@ -1,14 +1,12 @@
 extends Node2D
 class_name Dungeon
 
-@onready var transition = $SceneTransAnim/CanvasLayer/AnimationPlayer
-@onready var transition_mask = $SceneTransAnim/CanvasLayer/ColorRect
 
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
-	transition_mask.color.a = 255
-	transition.play("FadeIn")
+	pass
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

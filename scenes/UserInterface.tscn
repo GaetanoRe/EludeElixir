@@ -1,10 +1,112 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6gs3mjn2hh6s"]
+[gd_scene load_steps=10 format=3 uid="uid://b6gs3mjn2hh6s"]
 
 [ext_resource type="Script" path="res://scripts/misc/UserInterface.gd" id="1_2xvxe"]
 [ext_resource type="Texture2D" uid="uid://b3iy1d3fb2xwo" path="res://assets/sprites/user_interface/Potion_Bar_UI.png" id="1_gq1it"]
 [ext_resource type="Texture2D" uid="uid://be7vafnl5pd0a" path="res://assets/sprites/user_interface/Potion_Bar_UI_Glass-export.png" id="2_jn74y"]
 [ext_resource type="Texture2D" uid="uid://b2hhgehgjke3a" path="res://assets/sprites/user_interface/Potion_Bar_UI_Liquid-export-export.png" id="4_ov4jh"]
 [ext_resource type="Script" path="res://scripts/misc/Potion.gd" id="5_8n76n"]
+
+[sub_resource type="Animation" id="Animation_uvcdg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UserInterface/Control/InGameUI/Potion:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UserInterface/Control/InGameUI/Potion:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UserInterface/Control/InGameUI/Potion:value")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [100.0]
+}
+
+[sub_resource type="Animation" id="Animation_oxiqp"]
+resource_name = "UI_Enveloped"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UserInterface/Control/InGameUI/Potion:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UserInterface/Control/InGameUI/Potion:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [100.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_a0u2m"]
+resource_name = "UI_Fade_In"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UserInterface/Control/InGameUI/Potion:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UserInterface/Control/InGameUI/Potion:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 100.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_us501"]
+_data = {
+"RESET": SubResource("Animation_uvcdg"),
+"UI_Enveloped": SubResource("Animation_oxiqp"),
+"UI_Fade_In": SubResource("Animation_a0u2m")
+}
 
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource("1_2xvxe")
@@ -43,3 +145,9 @@ texture_over = ExtResource("1_gq1it")
 texture_progress = ExtResource("4_ov4jh")
 texture_progress_offset = Vector2(28, 16)
 script = ExtResource("5_8n76n")
+
+[node name="UI_AnimPlayer" type="AnimationPlayer" parent="Control/InGameUI"]
+root_node = NodePath("../../../..")
+libraries = {
+"": SubResource("AnimationLibrary_us501")
+}
