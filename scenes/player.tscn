@@ -106,7 +106,6 @@ script = ExtResource("12_lshuk")
 wait_time = 15.0
 
 [node name="SceneTransAnim" parent="." instance=ExtResource("13_5ip57")]
-visible = false
 
 [connection signal="area_entered" from="LightDetection" to="." method="_on_light_detection_area_entered"]
 [connection signal="area_exited" from="LightDetection" to="." method="_on_light_detection_area_exited"]
