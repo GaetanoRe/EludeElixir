@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_pibb6")
-saved_Musictab = 4
-saved_SFXtab = 3
+
+saved_Musictab = 2
+saved_SFXtab = 2

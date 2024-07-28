@@ -1,5 +1,8 @@
 extends Control
 
+
+#@onready var transition = $SceneTransAnim/CanvasLayer/AnimationPlayer
+#@onready var transition_mask = $SceneTransAnim/CanvasLayer/ColorRect
 var volume_db = [-80, -30, -23, -16, -12, -9, -8, -6, -5, -4.3, -2.8, -1.6, -1, -0.5, 0]
 var bus_Music: int
 var bus_SFX: int
@@ -26,6 +29,9 @@ func _process(delta):
 
 func _on_start_game_button_pressed():
 	SoundFx.button_click()
+	#transition_mask.color.a = 0
+	#transition.play("FadeOut")
+	#await get_tree().create_timer(1).timeout
 	var next_scene = load("res://scenes/dungeon.tscn")
 	get_tree().change_scene_to_packed(next_scene)
 
