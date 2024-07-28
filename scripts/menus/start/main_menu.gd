@@ -1,8 +1,8 @@
 extends Control
 
 
-@onready var transition = $CanvasLayer/AnimationPlayer
-@onready var transition_mask = $CanvasLayer/ColorRect
+@onready var transition = $SceneTransAnim/CanvasLayer/AnimationPlayer
+@onready var transition_mask = $SceneTransAnim/CanvasLayer/ColorRect
 var volume_db = [-80, -30, -23, -16, -12, -9, -8, -6, -5, -4.3, -2.8, -1.6, -1, -0.5, 0]
 var bus_Music: int
 var bus_SFX: int

@@ -2,7 +2,8 @@ extends CharacterBody2D
 class_name Player
 
 @onready var transition = $SceneTransAnim/CanvasLayer/AnimationPlayer
-@onready var transition_mask = $SceneTransAnim/CanvasLayer/ColorRect
+@onready var animation = $AnimatedSprite2D
+@onready var UI_anim = $UserInterface/Control/InGameUI/UI_AnimPlayer
 @export var current_level : Node2D
 @export var doses : int = 5
 @export var max_doses : int = 5
@@ -27,6 +28,10 @@ func _ready():
 	shadow = false
 	light_area = get_node("LightDetection")
 	timer = get_node("Timer")
+	UI_anim.play("UI_Fade_In")
+	transition.play("FadeIn")
+	animation.play("Alchemist_Idle")
+	
 
 
 
@@ -46,6 +51,20 @@ func _process(delta):
 		shadow = false
 		print("player is now Alchemist")
 
+
+	#   Alchemist Animation
+	#if Input.is_action_just_pressed("jump") and is_on_floor() and enveloped == false:
+		#animation.play("Alchemist_Jump")
+	#if Input.is_action_just_pressed("slide") and is_on_floor() and enveloped == false:
+		#animation.play("Alchemist_Slide")
+	#if velocity.y > 0 and enveloped == false:	#animation.play("Alchemist_Fall")
+	#if velocity.x != 0 and velocity.y == 0 and is_on_floor() and enveloped == false:
+		#animation.play("Alchemist_Run")
+		
+	# While loop might break game. Try using a Timer instead
+	# Include condition to not reset to 0 if timer is already running
+	#while Input.is_action_pressed("jump") and !is_on_floor():
+		#animation.play("Shadow_Glide")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -84,9 +103,10 @@ func _on_light_detection_area_entered(area):
 	elif(area.is_in_group("dark_area") && !shadow):
 		print("Uh oh! You've been Enveloped!")
 		enveloped = true
+		UI_anim.play("UI_Enveloped")
+		animation.play("Alchemist_Enveloped")
 		transition.play("Enveloped")
 		await get_tree().create_timer(4.5).timeout
-		transition_mask.color.a = 255
 		var next_scene = load("res://scenes/dungeon.tscn")
 		get_tree().change_scene_to_packed(next_scene)
 
