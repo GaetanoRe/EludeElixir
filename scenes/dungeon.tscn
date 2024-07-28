@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuobvows34x5g"]
+[gd_scene load_steps=5 format=3 uid="uid://cuobvows34x5g"]
 
 [ext_resource type="PackedScene" uid="uid://b6gs3mjn2hh6s" path="res://scenes/UI.tscn" id="1_ipcx5"]
 [ext_resource type="Script" path="res://scripts/levels/dungeon.gd" id="1_p4ssy"]
 [ext_resource type="PackedScene" uid="uid://ba51p6hctw0ao" path="res://scenes/level_Demo.tscn" id="2_8mtic"]
+[ext_resource type="PackedScene" uid="uid://cl4s2w48roiwc" path="res://scenes/scene_trans_anim.tscn" id="4_sbr1b"]
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_p4ssy")
@@ -15,3 +16,6 @@ script = ExtResource("1_p4ssy")
 
 [node name="UserInterface" parent="." instance=ExtResource("1_ipcx5")]
 unique_name_in_owner = true
+
+
+[node name="SceneTransAnim" parent="." instance=ExtResource("4_sbr1b")]
