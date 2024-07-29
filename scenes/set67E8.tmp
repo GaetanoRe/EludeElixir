@@ -1,10 +1,10 @@
-[gd_scene load_steps=89 format=3 uid="uid://b3nyf8tp7aff4"]
+[gd_scene load_steps=88 format=3 uid="uid://b3nyf8tp7aff4"]
 
 [ext_resource type="Script" path="res://scripts/menus/start/settings_menu.gd" id="1_h3jse"]
 [ext_resource type="Texture2D" uid="uid://biw1do6xb1dc4" path="res://assets/icons/W_button.png" id="2_5efrj"]
 [ext_resource type="Texture2D" uid="uid://bcksb8ce0nrkq" path="res://assets/icons/A_button.png" id="2_w2ivd"]
 [ext_resource type="Texture2D" uid="uid://duti1blotwk4p" path="res://assets/icons/D_button.png" id="3_8l3ol"]
-[ext_resource type="Texture2D" uid="uid://cpsjpx4powmmd" path="res://assets/mjolnir/PS_Thor.png" id="3_s0763"]
+[ext_resource type="Texture2D" uid="uid://cpsjpx4powmmd" path="res://assets/icons/PS_Thor.png" id="3_s0763"]
 [ext_resource type="Texture2D" uid="uid://d4mlk7pbq26g3" path="res://assets/icons/E_button.png" id="5_vk0qj"]
 [ext_resource type="Texture2D" uid="uid://c2fopqh65ynp2" path="res://assets/sprites/Character/Alchemist_Jump.png" id="6_kyu8x"]
 [ext_resource type="Texture2D" uid="uid://c46jfdj5jkr6l" path="res://assets/sprites/Character/Alchemist_Drink.png" id="6_xampe"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://c5mnggfhonf5s" path="res://assets/sprites/Character/Shadow_Jump.png" id="10_iky6k"]
 [ext_resource type="Texture2D" uid="uid://cl5sffcw4uhc8" path="res://assets/sprites/Character/Shadow_Idle.png" id="11_hdow3"]
 [ext_resource type="Texture2D" uid="uid://dbqvb5vg2gs57" path="res://assets/sprites/Character/Shadow_Run.png" id="12_johdu"]
-[ext_resource type="Texture2D" uid="uid://b10euo5mnpj1p" path="res://assets/mjolnir/PS_GameJam15.jpg" id="15_85kf2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b06t2"]
 
@@ -739,7 +738,6 @@ deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 
 [node name="W" type="TextureButton" parent="(Controls)/OR"]
-layout_mode = 0
 offset_left = -38.0
 offset_top = -1.0
 offset_right = -22.0
@@ -783,7 +781,6 @@ scale = Vector2(2, 2)
 texture_normal = ExtResource("3_8l3ol")
 
 [node name="E" type="TextureButton" parent="(Controls)"]
-layout_mode = 0
 offset_left = -56.5
 offset_top = 229.0
 offset_right = -40.5
@@ -880,14 +877,14 @@ position = Vector2(168, 225)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_3axnk")
 animation = &"Alchemist_Drink"
-frame_progress = 0.345335
+frame_progress = 0.415846
 
 [node name="Shadow" type="AnimatedSprite2D" parent="."]
 position = Vector2(980, 225)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_3axnk")
-animation = &"Enveloped"
-flip_h = true
+animation = &"Shadow_Idle"
+frame_progress = 0.274703
 
 [node name="Thor_W" type="Sprite2D" parent="."]
 visible = false
@@ -912,14 +909,6 @@ visible = false
 position = Vector2(480, 297)
 scale = Vector2(0.16, 0.16)
 texture = ExtResource("3_s0763")
-
-[node name="PsGameJam15" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(949, 510)
-scale = Vector2(0.753676, 0.753676)
-texture = ExtResource("15_85kf2")
-region_enabled = true
-region_rect = Rect2(130, 0, 420, 272)
 
 [connection signal="tab_clicked" from="Volume - Music" to="." method="_on_volume__music_tab_clicked"]
 [connection signal="tab_selected" from="Volume - Music" to="." method="_on_volume__music_tab_selected"]

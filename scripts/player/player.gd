@@ -35,12 +35,13 @@ func _ready():
 
 
 
-# If player is not shadow and has at least 1 dose when pressing E,
-# they switch to shadow form for 15 seconds
 func _process(delta):
 	
 	#   Elude Elixir
 	if Input.is_action_just_pressed("drink") and !shadow and !enveloped and doses >= 1:
+		animation.play("Alchemist_Drink")
+		if animation.is_playing():
+			await get_tree().create_timer(1.6).timeout
 		doses -= 1
 		doses_changed.emit()
 		shadow = true
@@ -55,7 +56,8 @@ func _process(delta):
 		print("player is now Alchemist")
 
 
-
+	if animation.get_animation() == "Alchemist_Drink":
+		await get_tree().create_timer(1.6).timeout
 
 	#   Alchemist Animations
 	if Input.is_action_pressed("jump") and is_on_floor() and !enveloped and !shadow:
@@ -90,7 +92,7 @@ func _process(delta):
 		if velocity.x == 0 and velocity.y == 0:
 			animation.play("Alchemist_Idle")
 	
-	#if Input.is_action_just_pressed("slide") and is_on_floor() and !enveloped and !shadow:
+	#if Input.is_action_pressed("slide") and is_on_floor() and !enveloped and !shadow:
 		#animation.play("Alchemist_Slide")
 	
 	#   Prevent weird behavior - Alchemist
@@ -138,6 +140,7 @@ func _process(delta):
 			animation.set_frame_and_progress(current_frame, current_progress)
 		if velocity.x == 0 and velocity.y == 0:
 			animation.play("Shadow_Idle")
+	
 		# While loop might break game. Try using a Timer instead
 		# Include condition to not reset to 0 if timer is already running
 		#while Input.is_action_pressed("jump") and !is_on_floor():
@@ -235,7 +238,7 @@ func _on_light_detection_area_entered(area):
 		print("Uh oh! You've been Enveloped!")
 		enveloped = true
 		UI_anim.play("UI_Enveloped")
-		animation.play("Enveloped_Run")
+		animation.play("Enveloped")
 		transition.play("Enveloped")
 		await get_tree().create_timer(4.5).timeout
 		var next_scene = load("res://scenes/dungeon.tscn")
