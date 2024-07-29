@@ -367,6 +367,21 @@ _data = {
 "diagonal": SubResource("Animation_oieyl")
 }
 
+[sub_resource type="Animation" id="Animation_f7uek"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11704, 687)]
+}
+
 [sub_resource type="Animation" id="Animation_cfknc"]
 resource_name = "spikewall"
 length = 1.5
@@ -384,7 +399,13 @@ tracks/0/keys = {
 "values": [Vector2(11704, 687), Vector2(11999, 687)]
 }
 
-[sub_resource type="Animation" id="Animation_f7uek"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jj7tj"]
+_data = {
+"RESET": SubResource("Animation_f7uek"),
+"spikewall": SubResource("Animation_cfknc")
+}
+
+[sub_resource type="Animation" id="Animation_4ftmq"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -396,13 +417,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(11704, 687)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jj7tj"]
-_data = {
-"RESET": SubResource("Animation_f7uek"),
-"spikewall": SubResource("Animation_cfknc")
+"values": [Vector2(12049, 639)]
 }
 
 [sub_resource type="Animation" id="Animation_wc3y8"]
@@ -422,7 +437,13 @@ tracks/0/keys = {
 "values": [Vector2(12049, 639), Vector2(12309, 639)]
 }
 
-[sub_resource type="Animation" id="Animation_4ftmq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2f0ge"]
+_data = {
+"RESET": SubResource("Animation_4ftmq"),
+"spikewall2": SubResource("Animation_wc3y8")
+}
+
+[sub_resource type="Animation" id="Animation_jw3uo"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -434,13 +455,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(12049, 639)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2f0ge"]
-_data = {
-"RESET": SubResource("Animation_4ftmq"),
-"spikewall2": SubResource("Animation_wc3y8")
+"values": [Vector2(12371, 638)]
 }
 
 [sub_resource type="Animation" id="Animation_sy72l"]
@@ -460,7 +475,13 @@ tracks/0/keys = {
 "values": [Vector2(12371, 638), Vector2(12691, 639)]
 }
 
-[sub_resource type="Animation" id="Animation_jw3uo"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pqr7c"]
+_data = {
+"RESET": SubResource("Animation_jw3uo"),
+"spikewall3": SubResource("Animation_sy72l")
+}
+
+[sub_resource type="Animation" id="Animation_w2ubh"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -472,13 +493,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(12371, 638)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pqr7c"]
-_data = {
-"RESET": SubResource("Animation_jw3uo"),
-"spikewall3": SubResource("Animation_sy72l")
+"values": [Vector2(13044, 639)]
 }
 
 [sub_resource type="Animation" id="Animation_br2sj"]
@@ -496,21 +511,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(13044, 639), Vector2(12723, 639)]
-}
-
-[sub_resource type="Animation" id="Animation_w2ubh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(13044, 639)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cel1j"]
@@ -570,7 +570,7 @@ position = Vector2(9967, -1828)
 
 [node name="Player" parent="." node_paths=PackedStringArray("current_level") instance=ExtResource("3_pfwmd")]
 unique_name_in_owner = true
-position = Vector2(158, 97)
+position = Vector2(159, 97)
 current_level = NodePath("..")
 
 [node name="Platform" parent="." instance=ExtResource("7_2dtjv")]
@@ -853,3 +853,7 @@ libraries = {
 "": SubResource("AnimationLibrary_cel1j")
 }
 autoplay = "spikewall4"
+
+[node name="ShadowRect2" parent="." instance=ExtResource("13_2h6io")]
+position = Vector2(1702, 4.00001)
+scale = Vector2(2.25501, 0.831585)
