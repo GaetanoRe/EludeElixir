@@ -7,7 +7,7 @@ var bus_SFX: int
 @export var Musictab: int
 @export var SFXtab: int
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	bus_Music = AudioServer.get_bus_index("Music")
 	bus_SFX = AudioServer.get_bus_index("SoundEffects")
@@ -19,6 +19,46 @@ func _ready():
 		SFXtab = saved_data.saved_SFXtab
 		$"Volume - Music".set_current_tab(Musictab)
 		$"Volume - Sound Effects".set_current_tab(SFXtab)
+	
+	$Alchemist.play("Alchemist_Idle")
+	$Shadow.play("Shadow_Idle")
+
+
+
+
+#   Easter Eggs
+func _process(delta):
+	if Input.is_action_pressed("jump"):
+		$Thor_W.visible = true
+	elif !Input.is_action_pressed("jump"):
+		$Thor_W.visible = false
+	if Input.is_action_pressed("walk_left"):
+		$Thor_A.visible = true
+	elif !Input.is_action_pressed("walk_left"):
+		$Thor_A.visible = false
+	if Input.is_action_pressed("walk_right"):
+		$Thor_D.visible = true
+	elif !Input.is_action_pressed("walk_right"):
+		$Thor_D.visible = false
+	if Input.is_action_pressed("drink"):
+		$Thor_E.visible = true
+	elif !Input.is_action_pressed("drink"):
+		$Thor_E.visible = false
+	
+	if Input.is_action_pressed("jump") and Input.is_action_pressed("walk_left") and Input.is_action_pressed("walk_right") and Input.is_action_pressed("drink") :
+		$PsGameJam15.visible = true
+
+	if Input.is_action_just_pressed("drink") and $Alchemist.get_animation() ==  "Alchemist_Idle":
+		$Alchemist.play("Alchemist_Drink")
+		await get_tree().create_timer(1.6).timeout
+		$Alchemist.play("Shadow_Idle")
+		$Shadow.play("Alchemist_Idle")
+	if Input.is_action_just_pressed("drink") and $Alchemist.get_animation() ==  "Shadow_Idle":
+		$Shadow.play("Alchemist_Drink")
+		await get_tree().create_timer(1.6).timeout
+		$Alchemist.play("Alchemist_Idle")
+		$Shadow.play("Shadow_Idle")
+
 
 
 
@@ -34,6 +74,7 @@ func _on_volume__sound_effects_tab_selected(tab):
 	SoundFx.volume_click()
 	AudioServer.set_bus_volume_db(bus_SFX, volume_db[tab])
 	SFXtab = tab
+
 
 
 
