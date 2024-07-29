@@ -4,9 +4,11 @@ class_name Player
 @onready var transition = $SceneTransAnim/CanvasLayer/AnimationPlayer
 @onready var animation = $AnimatedSprite2D
 @onready var UI_anim = $UserInterface/Control/InGameUI/UI_AnimPlayer
+@onready var dash_part = $DashParticles
 @export var current_level : Node2D
 @export var doses : int = 5
 @export var max_doses : int = 5
+@export var dash_count = 0
 @export var shadow : bool
 @export var enveloped : bool
 @export var state : String
@@ -15,6 +17,7 @@ var gravity : float
 var gravity_default : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var speed : float
 var jumpVel : float = -500.0
+var dash_speed : float = 2000
 var playerVel : Vector2 = Vector2.ZERO
 var light_area : Area2D
 
@@ -126,6 +129,8 @@ func _input(event):
 		countdown_end.emit()
 		shadow = false
 		print("player is now Alchemist")
+		if(light_area.is_in_group("dark_area")):
+			envelop()
 
 
 
@@ -133,14 +138,17 @@ func _input(event):
 func _physics_process(delta):
 	
 	playerVel = velocity
-
+	
 	if (!shadow):
+		dash_count = 0
 		gravity = gravity_default
 		speed = 300
 	else:
-		gravity = gravity_default / 2
+		if(is_on_floor()):
+			dash_count = 1
+		gravity = gravity_default / 1.5
 		speed = 350
-
+	
 	var direction = Input.get_vector("walk_left", "walk_right", "jump", "crouch")
 	if(direction.x != 0):
 		playerVel.x = direction.x * speed 
@@ -150,7 +158,23 @@ func _physics_process(delta):
 		playerVel.y += jumpVel
 
 	if(!is_on_floor()):
-		playerVel.y += gravity * delta
+		
+		if(shadow and Input.is_action_just_pressed("dash") and dash_count != 0):
+			dash_part.emitting = true
+			if(animation.flip_h):
+				dash_part.gravity.x = 980
+				playerVel.x += dash_speed
+			else:
+				dash_part.gravity.x = -980
+				playerVel.x -= dash_speed
+			await get_tree().create_timer(0.1).timeout
+			dash_part.emitting = false
+			dash_count -= 1
+		else:
+			playerVel.y += gravity * delta
+	
+	if(enveloped):
+		playerVel.x = 0
 
 	velocity = playerVel
 	move_and_slide()
@@ -161,6 +185,22 @@ func _on_light_detection_area_entered(area):
 		print("Character is touching light")
 	
 	elif(area.is_in_group("dark_area") && !shadow):
+		envelop()
+
+
+func _on_light_detection_area_exited(area):
+	if(area.is_in_group("lights")):
+		print("Character has exited the light")
+		
+
+
+# Use this function to deal with trap damage...
+func _on_hurt_box_area_entered(area):
+	if(area.is_in_group("traps")):
+		print("I have hit the trap!")
+		
+
+func envelop() -> void:
 		print("Uh oh! You've been Enveloped!")
 		enveloped = true
 		UI_anim.play("UI_Enveloped")
@@ -169,15 +209,4 @@ func _on_light_detection_area_entered(area):
 		await get_tree().create_timer(4.5).timeout
 		var next_scene = load("res://scenes/dungeon.tscn")
 		get_tree().change_scene_to_packed(next_scene)
-
-
-func _on_light_detection_area_exited(area):
-	if(area.is_in_group("lights")):
-		print("Character has exited the light")
-
-
-# Use this function to deal with trap damage...
-func _on_hurt_box_area_entered(area):
-	if(area.is_in_group("traps")):
-		print("I have hit the trap!")
 
