@@ -9,6 +9,7 @@ class_name Player
 @export var max_doses : int = 5
 @export var shadow : bool
 @export var enveloped : bool
+@export var state : String
 var timer : Timer
 var gravity : float
 var gravity_default : float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -31,21 +32,92 @@ func _ready():
 	shadow = false
 	light_area = get_node("LightDetection")
 	timer = get_node("Timer")
+	state = "Alchemist"
 
 
 
 
 func _process(delta):
 	
+	## Handles Different Sprite Animations
+	if(shadow):
+		state = "Shadow"
+	else:
+		state = "Alchemist"
+	if animation.get_animation() == "Alchemist_Drink":
+		await get_tree().create_timer(1.6).timeout
+
+
+	#   Enveloped Animations
+	if(enveloped):
+		if Input.is_action_pressed("jump") and is_on_floor():
+			var current_frame = animation.get_frame()
+			var current_progress = animation.get_frame_progress()
+			animation.play("Enveloped")
+			animation.set_frame_and_progress(current_frame, current_progress)
+	
+	#   Mid-Air - Enveloped
+		if !is_on_floor():
+			if velocity.x != 0:
+				animation.flip_h = velocity.x < 0
+				var current_frame = animation.get_frame()
+				var current_progress = animation.get_frame_progress()
+				animation.play("Enveloped")
+				animation.set_frame_and_progress(current_frame, current_progress)
+	
+	#   Prevent weird behavior - Enveloped
+		if velocity.x > 0 and is_on_floor():
+			animation.flip_h = velocity.x < 0
+			var current_frame = animation.get_frame()
+			var current_progress = animation.get_frame_progress()
+			animation.play("Enveloped")
+			animation.set_frame_and_progress(current_frame, current_progress)
+	
+	#   Non-Enveloped Animations
+	else:
+		# Player Animations (The different states will assign a different string to the animations to 
+		# prevent repeating code, depending on the state.)
+		if Input.is_action_pressed("jump") and is_on_floor():
+			animation.play(state + "_Jump")
+	
+		#   Mid-Air - Player
+		if !is_on_floor():
+			if velocity.x != 0 and velocity.y < 0:
+				animation.flip_h = velocity.x < 0
+				var current_frame = animation.get_frame()
+				var current_progress = animation.get_frame_progress()
+				animation.play(state + "_Jump")
+				animation.set_frame_and_progress(current_frame, current_progress)
+			if velocity.x != 0 and velocity.y > 0:
+				animation.flip_h = velocity.x < 0
+				var current_frame = animation.get_frame()
+				var current_progress = animation.get_frame_progress()
+				animation.play(state + "_Fall")
+				animation.set_frame_and_progress(current_frame, current_progress)
+			if velocity == Vector2.ZERO:
+				animation.play(state + "_Idle")
+		
+		#if Input.is_action_pressed("slide") and is_on_floor() and !enveloped and !shadow:
+			#animation.play("Alchemist_Slide")
+		
+		#   Prevent weird behavior - Alchemist
+		if velocity.x != 0 and is_on_floor():
+			animation.flip_h = velocity.x < 0
+			animation.play(state + "_Run")
+		if velocity == Vector2.ZERO:
+			animation.play(state + "_Idle")
+
+
+
+func _input(event):
 	#   Elude Elixir
-	if Input.is_action_just_pressed("drink") and !shadow and !enveloped and doses >= 1:
+	if event.is_action_pressed("drink") and !shadow and !enveloped and doses >= 1 and velocity == Vector2.ZERO:
 		animation.play("Alchemist_Drink")
 		if animation.is_playing():
 			await get_tree().create_timer(1.6).timeout
 		doses -= 1
 		doses_changed.emit()
 		shadow = true
-		animation.play("Shadow_Idle")
 		#emit_signal("doses_changed", doses)    <- Not needed? Already have doses_changed.emit() above
 		print("player is now Shadow")
 		countdown_start.emit()
@@ -54,150 +126,6 @@ func _process(delta):
 		countdown_end.emit()
 		shadow = false
 		print("player is now Alchemist")
-
-
-	if animation.get_animation() == "Alchemist_Drink":
-		await get_tree().create_timer(1.6).timeout
-
-	#   Alchemist Animations
-	if Input.is_action_pressed("jump") and is_on_floor() and !enveloped and !shadow:
-		animation.play("Alchemist_Jump")
-	
-	#   Mid-Air - Alchemist
-	if !is_on_floor() and !enveloped and !shadow:
-		if velocity.x > 0 and velocity.y < 0:
-			animation.flip_h = false
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Alchemist_Jump")
-			animation.set_frame_and_progress(current_frame, current_progress)
-		if velocity.x < 0 and velocity.y < 0:
-			animation.flip_h = true
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Alchemist_Jump")
-			animation.set_frame_and_progress(current_frame, current_progress)
-		if velocity.x > 0 and velocity.y > 0:
-			animation.flip_h = false
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Alchemist_Fall")
-			animation.set_frame_and_progress(current_frame, current_progress)
-		if velocity.x < 0 and velocity.y > 0:
-			animation.flip_h = true
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Alchemist_Fall")
-			animation.set_frame_and_progress(current_frame, current_progress)
-		if velocity.x == 0 and velocity.y == 0:
-			animation.play("Alchemist_Idle")
-	
-	#if Input.is_action_pressed("slide") and is_on_floor() and !enveloped and !shadow:
-		#animation.play("Alchemist_Slide")
-	
-	#   Prevent weird behavior - Alchemist
-	if !Input.is_action_pressed("jump") and velocity.x > 0 and velocity.y == 0 and is_on_floor() and !enveloped and !shadow:
-		animation.flip_h = false
-		animation.play("Alchemist_Run")
-	if !Input.is_action_pressed("jump") and velocity.x < 0 and velocity.y == 0 and is_on_floor() and !enveloped and !shadow:
-		animation.flip_h = true
-		animation.play("Alchemist_Run")
-	if !Input.is_action_pressed("jump") and velocity.x == 0 and velocity.y == 0 and !enveloped and !shadow:
-		animation.play("Alchemist_Idle")
-
-
-
-
-	#   Shadow Animations
-	if Input.is_action_pressed("jump") and is_on_floor() and shadow == true:
-		animation.play("Shadow_Jump")
-		
-	#   Mid-Air - Shadow
-	if !is_on_floor() and shadow == true:
-		if velocity.x > 0 and velocity.y < 0:
-			animation.flip_h = false
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Shadow_Jump")
-			animation.set_frame_and_progress(current_frame, current_progress)
-		if velocity.x < 0 and velocity.y < 0:
-			animation.flip_h = true
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Shadow_Jump")
-			animation.set_frame_and_progress(current_frame, current_progress)
-		if velocity.x > 0 and velocity.y > 0:
-			animation.flip_h = false
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Shadow_Fall")
-			animation.set_frame_and_progress(current_frame, current_progress)
-		if velocity.x < 0 and velocity.y > 0:
-			animation.flip_h = true
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Shadow_Fall")
-			animation.set_frame_and_progress(current_frame, current_progress)
-		if velocity.x == 0 and velocity.y == 0:
-			animation.play("Shadow_Idle")
-	
-		# While loop might break game. Try using a Timer instead
-		# Include condition to not reset to 0 if timer is already running
-		#while Input.is_action_pressed("jump") and !is_on_floor():
-			#animation.play("Shadow_Glide")
-	
-	#   Prevent weird behavior - Shadow
-	if !Input.is_action_pressed("jump") and velocity.x > 0 and velocity.y == 0 and is_on_floor() and shadow == true:
-		animation.flip_h = false
-		animation.play("Shadow_Run")
-	if !Input.is_action_pressed("jump") and velocity.x < 0 and velocity.y == 0 and is_on_floor() and shadow == true:
-		animation.flip_h = true
-		animation.play("Shadow_Run")
-	if !Input.is_action_pressed("jump") and velocity.x == 0 and velocity.y == 0 and shadow == true:
-		animation.play("Shadow_Idle")
-
-
-
-
-	#   Enveloped Animations
-	if Input.is_action_pressed("jump") and is_on_floor() and enveloped == true:
-		var current_frame = animation.get_frame()
-		var current_progress = animation.get_frame_progress()
-		animation.play("Enveloped")
-		animation.set_frame_and_progress(current_frame, current_progress)
-	
-	#   Mid-Air - Enveloped
-	if !is_on_floor() and enveloped == true:
-		if velocity.x > 0:
-			animation.flip_h = false
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Enveloped")
-			animation.set_frame_and_progress(current_frame, current_progress)
-		if velocity.x < 0:
-			animation.flip_h = true
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Enveloped")
-			animation.set_frame_and_progress(current_frame, current_progress)
-	
-	#   Prevent weird behavior - Enveloped
-	if !Input.is_action_pressed("jump") and velocity.x > 0 and is_on_floor() and enveloped == true:
-		animation.flip_h = false
-		var current_frame = animation.get_frame()
-		var current_progress = animation.get_frame_progress()
-		animation.play("Enveloped")
-		animation.set_frame_and_progress(current_frame, current_progress)
-	if !Input.is_action_pressed("jump") and velocity.x < 0 and is_on_floor() and enveloped == true:
-		animation.flip_h = true
-		var current_frame = animation.get_frame()
-		var current_progress = animation.get_frame_progress()
-		animation.play("Enveloped")
-		animation.set_frame_and_progress(current_frame, current_progress)
-
-
-
-
 
 
 
@@ -226,8 +154,6 @@ func _physics_process(delta):
 
 	velocity = playerVel
 	move_and_slide()
-
-
 
 
 func _on_light_detection_area_entered(area):
