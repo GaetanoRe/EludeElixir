@@ -6,9 +6,10 @@ size = Vector2(155, 111)
 [node name="ShadowRect" type="Area2D" groups=["dark_area"]]
 
 [node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
 offset_right = 155.0
 offset_bottom = 110.0
-color = Color(0, 0, 0, 0.101961)
+color = Color(0, 0, 0, 0.447059)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(78.5, 54.5)
