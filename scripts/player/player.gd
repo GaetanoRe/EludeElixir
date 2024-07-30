@@ -4,7 +4,6 @@ class_name Player
 @onready var transition = $SceneTransAnim/CanvasLayer/AnimationPlayer
 @onready var animation = $AnimatedSprite2D
 @onready var UI_anim = $UserInterface/Control/InGameUI/UI_AnimPlayer
-@onready var dash = $Dash
 @onready var dash_particles = $DashParticles
 
 @export var current_level : Node2D
@@ -15,6 +14,7 @@ class_name Player
 @export var in_darkness : bool
 @export var state : String
 @export var near_alembic : bool = false
+
 var timer : Timer
 var gravity : float
 var gravity_default : float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -24,8 +24,9 @@ var jumpVel : float = -500.0
 var playerVel : Vector2 = Vector2.ZERO
 var light_area : Area2D
 
-const dash_speed : float = 3600
-const dash_lengh : float = .3
+const dash_speed : float = 3000
+var dashing = false
+var can_dash = true
 
 
 signal doses_changed
@@ -135,19 +136,24 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	
 	playerVel = velocity
-	if(Input.is_action_pressed("slide") and shadow):
-			dash.start_dash(dash_lengh)
-	speed = dash_speed if dash.is_dashing() else norm_speed
-	#dash_particles.emitting = true if dash.is_dashing() else false
-	
-	if (!shadow):
-		gravity = gravity_default
-		speed = 300
-	else:
-		gravity = gravity_default / 2
-		speed = 350
+
+	if !dashing:
+		if (!shadow):
+			gravity = gravity_default
+			speed = 300
+		else:
+			gravity = gravity_default / 2
+			speed = 350
+
+	if Input.is_action_just_pressed("slide") and shadow and can_dash:
+		dashing = true
+		$dash_time.start()
+		$dash_antispam.start()
+		#dash_particles.emitting = true if dash.is_dashing() else false
+		if dashing:
+			speed = dash_speed
+			can_dash = false
 
 	var direction = Input.get_vector("walk_left", "walk_right", "jump", "crouch")
 	if(direction.x != 0):
@@ -156,9 +162,15 @@ func _physics_process(delta):
 		playerVel.x = 0
 	if(Input.is_action_pressed("jump") and is_on_floor()):
 		playerVel.y += jumpVel
-
+	
 	if(!is_on_floor()):
-		playerVel.y += gravity * delta
+		if Input.is_action_just_pressed("slide") and shadow and can_dash:
+			if Input.is_action_pressed("crouch"):
+				playerVel.y += dash_speed
+			else:
+				playerVel.y -= dash_speed
+		else:
+			playerVel.y += gravity * delta
 
 	velocity = playerVel
 	move_and_slide()
@@ -184,7 +196,7 @@ func _on_light_detection_area_exited(area):
 
 # Use this function to deal with trap damage...
 func _on_hurt_box_area_entered(area):
-	if(area.is_in_group("traps") and transition.current_animation != "YOU DIED"):
+	if(area.is_in_group("traps") and transition.current_animation != "Enveloped"):
 		print("I have hit the trap!")
 		enveloped = true
 		UI_anim.play("UI_Enveloped")
@@ -211,3 +223,11 @@ func _on_alembic_detection_area_entered(area):
 
 func _on_alembic_detection_area_exited(area):
 	near_alembic = false
+
+
+func _on_dash_time_timeout():
+	dashing = false
+
+
+func _on_dash_antispam_timeout():
+	can_dash = true

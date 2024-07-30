@@ -1,7 +1,7 @@
-[gd_scene load_steps=98 format=3 uid="uid://ky0t2odj46ce"]
+[gd_scene load_steps=97 format=3 uid="uid://ky0t2odj46ce"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_6qrgc"]
-[ext_resource type="Texture2D" uid="uid://c0gvlj24jvfsk" path="res://assets/sprites/Character/Purble_Shadow_Jump-Sheet.png" id="2_sky6e"]
+[ext_resource type="Texture2D" uid="uid://buhniyq2liigb" path="res://assets/sprites/Character/Purble_Shadow_Jump-Sheet.png" id="2_sky6e"]
 [ext_resource type="Texture2D" uid="uid://c2fopqh65ynp2" path="res://assets/sprites/Character/Alchemist_Jump.png" id="3_1b7r1"]
 [ext_resource type="Texture2D" uid="uid://b4f02ury3lpxj" path="res://assets/sprites/Character/Alchemist_Idle.png" id="3_h3y0j"]
 [ext_resource type="Texture2D" uid="uid://c46jfdj5jkr6l" path="res://assets/sprites/Character/Alchemist_Drink.png" id="3_snw1s"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://g8jvc2c5qrvd" path="res://scenes/scene_trans_anim.tscn" id="13_5ip57"]
 [ext_resource type="Script" path="res://scripts/player/states/glide_state.gd" id="13_lpmq5"]
 [ext_resource type="PackedScene" uid="uid://b6gs3mjn2hh6s" path="res://scenes/UserInterface.tscn" id="15_us04i"]
-[ext_resource type="PackedScene" uid="uid://0nsar6ui4pvl" path="res://scenes/dash.tscn" id="21_xoeh2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jlhjn"]
 atlas = ExtResource("3_snw1s")
@@ -686,10 +685,18 @@ visible = false
 
 [node name="UserInterface" parent="." instance=ExtResource("15_us04i")]
 
-[node name="Dash" parent="." instance=ExtResource("21_xoeh2")]
+[node name="dash_time" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[node name="dash_antispam" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [connection signal="area_entered" from="LightDetection" to="." method="_on_light_detection_area_entered"]
 [connection signal="area_exited" from="LightDetection" to="." method="_on_light_detection_area_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="AlembicDetection" to="." method="_on_alembic_detection_area_entered"]
 [connection signal="area_exited" from="AlembicDetection" to="." method="_on_alembic_detection_area_exited"]
+[connection signal="timeout" from="dash_time" to="." method="_on_dash_time_timeout"]
+[connection signal="timeout" from="dash_antispam" to="." method="_on_dash_antispam_timeout"]
