@@ -28,9 +28,13 @@ func _ready():
 
 #   Easter Eggs
 func _process(delta):
-	if Input.is_action_pressed("jump"):
+	if Input.is_physical_key_pressed(KEY_SPACE):
+		$Thor_SPACE.visible = true
+	elif !Input.is_physical_key_pressed(KEY_SPACE):
+		$Thor_SPACE.visible = false
+	if Input.is_physical_key_pressed(KEY_W):
 		$Thor_W.visible = true
-	elif !Input.is_action_pressed("jump"):
+	elif !Input.is_physical_key_pressed(KEY_W):
 		$Thor_W.visible = false
 	if Input.is_action_pressed("walk_left"):
 		$Thor_A.visible = true
@@ -45,7 +49,7 @@ func _process(delta):
 	elif !Input.is_action_pressed("drink"):
 		$Thor_E.visible = false
 	
-	if Input.is_action_pressed("jump") and Input.is_action_pressed("walk_left") and Input.is_action_pressed("walk_right") and Input.is_action_pressed("drink") :
+	if Input.is_physical_key_pressed(KEY_SPACE) and Input.is_physical_key_pressed(KEY_W) and Input.is_action_pressed("walk_left") and Input.is_action_pressed("walk_right") and Input.is_action_pressed("drink") :
 		$PsGameJam15.visible = true
 
 	if Input.is_action_just_pressed("drink") and $Alchemist.get_animation() ==  "Alchemist_Idle":
@@ -60,6 +64,9 @@ func _process(delta):
 		$Shadow.play("Shadow_Idle")
 
 
+func _input(event):
+	if event.is_action_pressed("pause"):
+		_on_back_button_pressed()
 
 
 # Change Music volume when selected and update reference variable

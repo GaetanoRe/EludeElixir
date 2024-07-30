@@ -9,7 +9,9 @@ class_name Player
 @export var max_doses : int = 5
 @export var shadow : bool
 @export var enveloped : bool
+@export var in_darkness : bool
 @export var state : String
+@export var near_alembic : bool = false
 var timer : Timer
 var gravity : float
 var gravity_default : float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -38,8 +40,12 @@ func _ready():
 
 
 func _process(delta):
+	if in_darkness and !shadow:
+		enveloped = true
+		enveloped_reset()
 	
-	## Handles Different Sprite Animations
+	
+	#   Handles Different Sprite Animations
 	if(shadow):
 		state = "Shadow"
 	else:
@@ -50,28 +56,11 @@ func _process(delta):
 
 	#   Enveloped Animations
 	if(enveloped):
-		if Input.is_action_pressed("jump") and is_on_floor():
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Enveloped")
-			animation.set_frame_and_progress(current_frame, current_progress)
-	
-	#   Mid-Air - Enveloped
-		if !is_on_floor():
-			if velocity.x != 0:
-				animation.flip_h = velocity.x < 0
-				var current_frame = animation.get_frame()
-				var current_progress = animation.get_frame_progress()
-				animation.play("Enveloped")
-				animation.set_frame_and_progress(current_frame, current_progress)
-	
-	#   Prevent weird behavior - Enveloped
-		if velocity.x > 0 and is_on_floor():
-			animation.flip_h = velocity.x < 0
-			var current_frame = animation.get_frame()
-			var current_progress = animation.get_frame_progress()
-			animation.play("Enveloped")
-			animation.set_frame_and_progress(current_frame, current_progress)
+		if velocity.x < 0:
+			animation.flip_h = true
+		if velocity.x > 0:
+			animation.flip_h = false
+		
 	
 	#   Non-Enveloped Animations
 	else:
@@ -80,7 +69,7 @@ func _process(delta):
 		if Input.is_action_pressed("jump") and is_on_floor():
 			animation.play(state + "_Jump")
 	
-		#   Mid-Air - Player
+		#   Mid-Air
 		if !is_on_floor():
 			if velocity.x != 0 and velocity.y < 0:
 				animation.flip_h = velocity.x < 0
@@ -97,10 +86,10 @@ func _process(delta):
 			if velocity == Vector2.ZERO:
 				animation.play(state + "_Idle")
 		
-		#if Input.is_action_pressed("slide") and is_on_floor() and !enveloped and !shadow:
+		#if Input.is_action_pressed("slide") and is_on_floor() and !shadow:
 			#animation.play("Alchemist_Slide")
 		
-		#   Prevent weird behavior - Alchemist
+		#   Prevent weird behavior
 		if velocity.x != 0 and is_on_floor():
 			animation.flip_h = velocity.x < 0
 			animation.play(state + "_Run")
@@ -108,13 +97,14 @@ func _process(delta):
 			animation.play(state + "_Idle")
 
 
-
+#   Elude Elixir
 func _input(event):
-	#   Elude Elixir
-	if event.is_action_pressed("drink") and !shadow and !enveloped and doses >= 1 and velocity == Vector2.ZERO:
+	if event.is_action_pressed("drink") and !shadow and !enveloped and doses >= 1:
 		animation.play("Alchemist_Drink")
 		if animation.is_playing():
 			await get_tree().create_timer(1.6).timeout
+			if !enveloped:
+				animation.play("Shadow_Idle")
 		doses -= 1
 		doses_changed.emit()
 		shadow = true
@@ -126,7 +116,11 @@ func _input(event):
 		countdown_end.emit()
 		shadow = false
 		print("player is now Alchemist")
-
+	
+	if event.is_action_pressed("interact") and near_alembic:
+		doses = 5
+		UI_anim.play("UI_Fill_Elixir")
+		print("Elixir refilled")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -156,28 +150,49 @@ func _physics_process(delta):
 	move_and_slide()
 
 
+
 func _on_light_detection_area_entered(area):
 	if(area.is_in_group("lights")):
 		print("Character is touching light")
 	
-	elif(area.is_in_group("dark_area") && !shadow):
-		print("Uh oh! You've been Enveloped!")
-		enveloped = true
-		UI_anim.play("UI_Enveloped")
-		animation.play("Enveloped")
-		transition.play("Enveloped")
-		await get_tree().create_timer(4.5).timeout
-		var next_scene = load("res://scenes/dungeon.tscn")
-		get_tree().change_scene_to_packed(next_scene)
+	elif area.is_in_group("dark_area"):
+		in_darkness = true
 
 
 func _on_light_detection_area_exited(area):
 	if(area.is_in_group("lights")):
 		print("Character has exited the light")
+	
+	elif area.is_in_group("dark_area"):
+		in_darkness = false
+
 
 
 # Use this function to deal with trap damage...
 func _on_hurt_box_area_entered(area):
 	if(area.is_in_group("traps")):
 		print("I have hit the trap!")
+		enveloped = true
+		UI_anim.play("UI_Enveloped")
+		animation.play("Enveloped")
+		transition.play("YOU_DIED")
+		await get_tree().create_timer(4.5).timeout
+		var next_scene = load("res://scenes/dungeon.tscn")
+		get_tree().change_scene_to_packed(next_scene)
 
+
+
+func enveloped_reset():
+	UI_anim.play("UI_Enveloped")
+	animation.play("Enveloped")
+	transition.play("Enveloped")
+	await get_tree().create_timer(4.5).timeout
+	var next_scene = load("res://scenes/dungeon.tscn")
+	get_tree().change_scene_to_packed(next_scene)
+
+
+func _on_alembic_detection_area_entered(area):
+	near_alembic = true
+
+func _on_alembic_detection_area_exited(area):
+	near_alembic = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://b3nyf8tp7aff4"]
+[gd_scene load_steps=90 format=3 uid="uid://b3nyf8tp7aff4"]
 
 [ext_resource type="Script" path="res://scripts/menus/start/settings_menu.gd" id="1_h3jse"]
 [ext_resource type="Texture2D" uid="uid://biw1do6xb1dc4" path="res://assets/icons/W_button.png" id="2_5efrj"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cl5sffcw4uhc8" path="res://assets/sprites/Character/Shadow_Idle.png" id="11_hdow3"]
 [ext_resource type="Texture2D" uid="uid://dbqvb5vg2gs57" path="res://assets/sprites/Character/Shadow_Run.png" id="12_johdu"]
 [ext_resource type="Texture2D" uid="uid://b10euo5mnpj1p" path="res://assets/mjolnir/PS_GameJam15.jpg" id="15_85kf2"]
+[ext_resource type="Texture2D" uid="uid://ewoaao473fye" path="res://assets/icons/Space_button.png" id="16_82wre"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b06t2"]
 
@@ -581,6 +582,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h3jse")
+Musictab = 5
+SFXtab = 5
+metadata/_edit_lock_ = true
 
 [node name="Volume - Music" type="TabBar" parent="."]
 layout_mode = 1
@@ -718,9 +722,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -240.0
+offset_left = -212.0
 offset_top = 53.0
-offset_right = -172.938
+offset_right = -144.938
 offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -746,6 +750,14 @@ offset_right = -22.0
 offset_bottom = 15.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("2_5efrj")
+
+[node name="SPACE" type="TextureButton" parent="(Controls)/OR"]
+offset_left = 76.0002
+offset_top = -1.0
+offset_right = 124.0
+offset_bottom = 15.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("16_82wre")
 
 [node name="Line2D" type="Line2D" parent="(Controls)"]
 position = Vector2(-464.5, -53)
@@ -784,9 +796,9 @@ texture_normal = ExtResource("3_8l3ol")
 
 [node name="E" type="TextureButton" parent="(Controls)"]
 layout_mode = 0
-offset_left = -56.5
+offset_left = -15.5
 offset_top = 229.0
-offset_right = -40.5
+offset_right = 0.5
 offset_bottom = 245.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("5_vk0qj")
@@ -799,9 +811,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 42.0
+offset_left = 41.0
 offset_top = 197.0
-offset_right = 207.0
+offset_right = 206.0
 offset_bottom = 228.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -827,15 +839,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 41.0
+offset_left = 37.5
 offset_top = 125.0
-offset_right = 198.0
+offset_right = 104.563
 offset_bottom = 156.0
 grow_horizontal = 2
 grow_vertical = 0
 focus_mode = 0
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_b06t2")
-text = "MOVE LEFT / RIGHT"
+text = "MOVE "
 alignment = 1
 editable = false
 expand_to_text_length = true
@@ -855,15 +867,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 42.5313
+offset_left = 35.5
 offset_top = 52.0
-offset_right = 228.531
+offset_right = 102.563
 offset_bottom = 83.0
 grow_horizontal = 2
 grow_vertical = 0
 focus_mode = 0
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_b06t2")
-text = "JUMP (HOLD TO GLIDE)"
+text = "JUMP"
 alignment = 1
 editable = false
 expand_to_text_length = true
@@ -886,12 +898,18 @@ frame_progress = 0.345335
 position = Vector2(980, 225)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_3axnk")
-animation = &"Enveloped"
+animation = &"Shadow_Idle"
 flip_h = true
+
+[node name="Thor_SPACE" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(489.5, 151.16)
+scale = Vector2(0.41, 0.165106)
+texture = ExtResource("3_s0763")
 
 [node name="Thor_W" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(314, 150)
+position = Vector2(342, 150)
 scale = Vector2(0.16, 0.16)
 texture = ExtResource("3_s0763")
 
@@ -909,7 +927,7 @@ texture = ExtResource("3_s0763")
 
 [node name="Thor_E" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(480, 297)
+position = Vector2(521, 297)
 scale = Vector2(0.16, 0.16)
 texture = ExtResource("3_s0763")
 
