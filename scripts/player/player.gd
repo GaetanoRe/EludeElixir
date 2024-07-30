@@ -4,6 +4,9 @@ class_name Player
 @onready var transition = $SceneTransAnim/CanvasLayer/AnimationPlayer
 @onready var animation = $AnimatedSprite2D
 @onready var UI_anim = $UserInterface/Control/InGameUI/UI_AnimPlayer
+@onready var dash = $Dash
+@onready var dash_particles = $DashParticles
+
 @export var current_level : Node2D
 @export var doses : int = 5
 @export var max_doses : int = 5
@@ -15,10 +18,15 @@ class_name Player
 var timer : Timer
 var gravity : float
 var gravity_default : float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var norm_speed : float
 var speed : float
 var jumpVel : float = -500.0
 var playerVel : Vector2 = Vector2.ZERO
 var light_area : Area2D
+
+const dash_speed : float = 3600
+const dash_lengh : float = .3
+
 
 signal doses_changed
 signal countdown_start
@@ -27,6 +35,7 @@ signal countdown_end
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	speed = norm_speed
 	transition.play("FadeIn")
 	UI_anim.play("UI_Fade_In")
 	animation.play("Alchemist_Idle")
@@ -66,6 +75,7 @@ func _process(delta):
 	else:
 		# Player Animations (The different states will assign a different string to the animations to 
 		# prevent repeating code, depending on the state.)
+		
 		if Input.is_action_pressed("jump") and is_on_floor():
 			animation.play(state + "_Jump")
 	
@@ -127,7 +137,11 @@ func _input(event):
 func _physics_process(delta):
 	
 	playerVel = velocity
-
+	if(Input.is_action_pressed("slide") and shadow):
+			dash.start_dash(dash_lengh)
+	speed = dash_speed if dash.is_dashing() else norm_speed
+	#dash_particles.emitting = true if dash.is_dashing() else false
+	
 	if (!shadow):
 		gravity = gravity_default
 		speed = 300
@@ -170,7 +184,7 @@ func _on_light_detection_area_exited(area):
 
 # Use this function to deal with trap damage...
 func _on_hurt_box_area_entered(area):
-	if(area.is_in_group("traps")):
+	if(area.is_in_group("traps") and transition.current_animation != "YOU DIED"):
 		print("I have hit the trap!")
 		enveloped = true
 		UI_anim.play("UI_Enveloped")
@@ -183,12 +197,13 @@ func _on_hurt_box_area_entered(area):
 
 
 func enveloped_reset():
-	UI_anim.play("UI_Enveloped")
-	animation.play("Enveloped")
-	transition.play("Enveloped")
-	await get_tree().create_timer(4.5).timeout
-	var next_scene = load("res://scenes/dungeon.tscn")
-	get_tree().change_scene_to_packed(next_scene)
+	if(transition.current_animation != "YOU DIED"):
+		UI_anim.play("UI_Enveloped")
+		animation.play("Enveloped")
+		transition.play("Enveloped")
+		await get_tree().create_timer(4.5).timeout
+		var next_scene = load("res://scenes/dungeon.tscn")
+		get_tree().change_scene_to_packed(next_scene)
 
 
 func _on_alembic_detection_area_entered(area):
