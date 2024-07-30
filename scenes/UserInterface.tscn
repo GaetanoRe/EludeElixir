@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6gs3mjn2hh6s"]
+[gd_scene load_steps=11 format=3 uid="uid://b6gs3mjn2hh6s"]
 
 [ext_resource type="Script" path="res://scripts/misc/UserInterface.gd" id="1_2xvxe"]
 [ext_resource type="Texture2D" uid="uid://b3iy1d3fb2xwo" path="res://assets/sprites/user_interface/Potion_Bar_UI.png" id="1_gq1it"]
@@ -47,7 +47,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_oxiqp"]
 resource_name = "UI_Enveloped"
-length = 3.0
+length = 4.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -101,11 +101,28 @@ tracks/1/keys = {
 "values": [0.0, 100.0]
 }
 
+[sub_resource type="Animation" id="Animation_ccd8q"]
+resource_name = "UI_FillElixir"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UserInterface/Control/InGameUI/Potion:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 100.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_us501"]
 _data = {
 "RESET": SubResource("Animation_uvcdg"),
 "UI_Enveloped": SubResource("Animation_oxiqp"),
-"UI_Fade_In": SubResource("Animation_a0u2m")
+"UI_Fade_In": SubResource("Animation_a0u2m"),
+"UI_Fill_Elixir": SubResource("Animation_ccd8q")
 }
 
 [node name="UserInterface" type="CanvasLayer"]
@@ -134,11 +151,11 @@ scale = Vector2(5, 5)
 pivot_offset = Vector2(0, 62)
 
 [node name="Potion" type="TextureProgressBar" parent="Control/InGameUI"]
-modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+value = 100.0
 fill_mode = 3
 texture_under = ExtResource("2_jn74y")
 texture_over = ExtResource("1_gq1it")

@@ -405,6 +405,21 @@ _data = {
 "spikewall": SubResource("Animation_cfknc")
 }
 
+[sub_resource type="Animation" id="Animation_0x5k1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(12029, 1355)]
+}
+
 [sub_resource type="Animation" id="Animation_0rvxb"]
 resource_name = "death"
 loop_mode = 2
@@ -421,7 +436,13 @@ tracks/0/keys = {
 "values": [Vector2(12029, 1355), Vector2(12220, 1355)]
 }
 
-[sub_resource type="Animation" id="Animation_0x5k1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q7vyb"]
+_data = {
+"RESET": SubResource("Animation_0x5k1"),
+"death": SubResource("Animation_0rvxb")
+}
+
+[sub_resource type="Animation" id="Animation_a264m"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -433,13 +454,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(12029, 1355)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_q7vyb"]
-_data = {
-"RESET": SubResource("Animation_0x5k1"),
-"death": SubResource("Animation_0rvxb")
+"values": [Vector2(12284, 1355)]
 }
 
 [sub_resource type="Animation" id="Animation_uhc4t"]
@@ -458,7 +473,13 @@ tracks/0/keys = {
 "values": [Vector2(12284, 1355), Vector2(12861, 1355)]
 }
 
-[sub_resource type="Animation" id="Animation_a264m"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_73mto"]
+_data = {
+"RESET": SubResource("Animation_a264m"),
+"death 2": SubResource("Animation_uhc4t")
+}
+
+[sub_resource type="Animation" id="Animation_numbe"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -470,13 +491,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(12284, 1355)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_73mto"]
-_data = {
-"RESET": SubResource("Animation_a264m"),
-"death 2": SubResource("Animation_uhc4t")
+"values": [Vector2(11742, 1355)]
 }
 
 [sub_resource type="Animation" id="Animation_r1vup"]
@@ -494,21 +509,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(11742, 1355), Vector2(11996, 1355)]
-}
-
-[sub_resource type="Animation" id="Animation_numbe"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(11742, 1355)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ijsnm"]
@@ -942,11 +942,25 @@ position = Vector2(10806, -487)
 [node name="Alembic" parent="." instance=ExtResource("12_hdrj1")]
 position = Vector2(9162, -405)
 
-[node name="Alembic6" parent="." instance=ExtResource("12_hdrj1")]
-position = Vector2(8638, 936)
-
 [node name="Alembic2" parent="." instance=ExtResource("12_hdrj1")]
 position = Vector2(4168, 172)
+alembic_id = 2
+
+[node name="Alembic3" parent="." instance=ExtResource("12_hdrj1")]
+position = Vector2(11649, -1529)
+alembic_id = 3
+
+[node name="Alembic4" parent="." instance=ExtResource("12_hdrj1")]
+position = Vector2(12265, 327)
+alembic_id = 4
+
+[node name="Alembic5" parent="." instance=ExtResource("12_hdrj1")]
+position = Vector2(13288, 550)
+alembic_id = 5
+
+[node name="Alembic6" parent="." instance=ExtResource("12_hdrj1")]
+position = Vector2(8638, 936)
+alembic_id = 6
 
 [node name="ShadowRect" parent="." instance=ExtResource("13_2h6io")]
 position = Vector2(680, 71)
@@ -1062,15 +1076,6 @@ scale = Vector2(150, 50)
 [node name="ShadowRect7" parent="." instance=ExtResource("13_2h6io")]
 position = Vector2(12200, -770)
 scale = Vector2(3, 3)
-
-[node name="Alembic3" parent="." instance=ExtResource("12_hdrj1")]
-position = Vector2(11649, -1529)
-
-[node name="Alembic4" parent="." instance=ExtResource("12_hdrj1")]
-position = Vector2(12265, 327)
-
-[node name="Alembic5" parent="." instance=ExtResource("12_hdrj1")]
-position = Vector2(13288, 550)
 
 [node name="TextEdit6" type="TextEdit" parent="."]
 offset_left = 13224.0
