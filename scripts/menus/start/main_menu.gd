@@ -20,7 +20,7 @@ func _ready():
 		SFXtab = saved_data.saved_SFXtab
 	AudioServer.set_bus_volume_db(bus_Music, volume_db[Musictab])
 	AudioServer.set_bus_volume_db(bus_SFX, volume_db[SFXtab])
-
+	SoundFx.play_menu_music()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -30,6 +30,7 @@ func _process(delta):
 
 func _on_start_game_button_pressed():
 	SoundFx.button_click()
+	SoundFx.fade_menu_music()
 	transition.play("FadeOut")
 	await get_tree().create_timer(1).timeout
 	var next_scene = load("res://scenes/dungeon.tscn")

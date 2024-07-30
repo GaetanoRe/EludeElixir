@@ -70,19 +70,16 @@ func _input(event):
 
 
 # Change Music volume when selected and update reference variable
-func _on_volume__music_tab_selected(tab):
+func _on_volume__music_tab_clicked(tab):
 	SoundFx.volume_click()
 	AudioServer.set_bus_volume_db(bus_Music, volume_db[tab])
 	Musictab = tab
 
 
-# Change Sound Effects volume when selected and update reference variable
-func _on_volume__sound_effects_tab_selected(tab):
+func _on_volume__sound_effects_tab_clicked(tab):
 	SoundFx.volume_click()
 	AudioServer.set_bus_volume_db(bus_SFX, volume_db[tab])
 	SFXtab = tab
-
-
 
 
 # Back Button
@@ -98,3 +95,4 @@ func _on_back_button_pressed():
 	# Change scene to main menu
 	var next_scene = load("res://scenes/main_menu.tscn")
 	get_tree().change_scene_to_packed(next_scene)
+
