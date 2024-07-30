@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6gs3mjn2hh6s"]
+[gd_scene load_steps=15 format=3 uid="uid://b6gs3mjn2hh6s"]
 
 [ext_resource type="Script" path="res://scripts/misc/UserInterface.gd" id="1_2xvxe"]
 [ext_resource type="Texture2D" uid="uid://b3iy1d3fb2xwo" path="res://assets/sprites/user_interface/Potion_Bar_UI.png" id="1_gq1it"]
 [ext_resource type="Texture2D" uid="uid://be7vafnl5pd0a" path="res://assets/sprites/user_interface/Potion_Bar_UI_Glass-export.png" id="2_jn74y"]
 [ext_resource type="Texture2D" uid="uid://b2hhgehgjke3a" path="res://assets/sprites/user_interface/Potion_Bar_UI_Liquid-export-export.png" id="4_ov4jh"]
 [ext_resource type="Script" path="res://scripts/misc/Potion.gd" id="5_8n76n"]
+[ext_resource type="Texture2D" uid="uid://bg603p1r70su7" path="res://assets/sprites/user_interface/DashMeterBehind.png" id="6_ql8u3"]
+[ext_resource type="Texture2D" uid="uid://b0ynoly0jtict" path="res://assets/sprites/user_interface/DashMeterFront.png" id="7_apy7e"]
+[ext_resource type="Texture2D" uid="uid://s84p083h0nhy" path="res://assets/sprites/user_interface/DashMeterFill.png" id="8_oh51h"]
+[ext_resource type="Script" path="res://scripts/misc/DashBar.gd" id="9_x74ps"]
 
 [sub_resource type="Animation" id="Animation_uvcdg"]
 length = 0.001
@@ -169,3 +173,15 @@ root_node = NodePath("../../../..")
 libraries = {
 "": SubResource("AnimationLibrary_us501")
 }
+
+[node name="DashBar" type="TextureProgressBar" parent="Control"]
+texture_filter = 1
+offset_left = 1060.0
+offset_top = 21.0
+offset_right = 1092.0
+offset_bottom = 57.0
+max_value = 2.0
+texture_under = ExtResource("6_ql8u3")
+texture_over = ExtResource("7_apy7e")
+texture_progress = ExtResource("8_oh51h")
+script = ExtResource("9_x74ps")

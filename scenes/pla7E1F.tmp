@@ -595,6 +595,7 @@ script = ExtResource("1_6qrgc")
 
 [node name="DashParticles" type="CPUParticles2D" parent="."]
 emitting = false
+draw_order = 1
 texture = ExtResource("2_sky6e")
 emission_shape = 3
 emission_rect_extents = Vector2(1, 1)
@@ -685,7 +686,7 @@ visible = false
 [node name="UserInterface" parent="." instance=ExtResource("15_us04i")]
 
 [node name="dash_time" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.05
 one_shot = true
 
 [node name="dash_antispam" type="Timer" parent="."]

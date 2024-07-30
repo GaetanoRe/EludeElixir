@@ -5,6 +5,9 @@ class_name Player
 @onready var animation = $AnimatedSprite2D
 @onready var UI_anim = $UserInterface/Control/InGameUI/UI_AnimPlayer
 @onready var dash_particles = $DashParticles
+@onready var dash_time = $dash_time
+@onready var dash_antispam = $dash_antispam
+
 
 @export var current_level : Node2D
 @export var doses : int = 5
@@ -24,7 +27,7 @@ var jumpVel : float = -500.0
 var playerVel : Vector2 = Vector2.ZERO
 var light_area : Area2D
 
-const dash_speed : float = 3000
+const dash_speed : float = 1500
 var dashing = false
 var can_dash = true
 
@@ -42,6 +45,7 @@ func _ready():
 	animation.play("Alchemist_Idle")
 	enveloped = false
 	shadow = false
+	dash_particles.emitting = false
 	light_area = get_node("LightDetection")
 	timer = get_node("Timer")
 	state = "Alchemist"
@@ -148,13 +152,16 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("slide") and shadow and can_dash:
 		dashing = true
-		$dash_time.start()
-		$dash_antispam.start()
+		dash_time.start()
+		dash_antispam.start()
 		#dash_particles.emitting = true if dash.is_dashing() else false
 		if dashing:
+			dash_particles.emitting = true
 			speed = dash_speed
 			can_dash = false
-
+			dash_particles.emitting = true
+			print("I am dashing")
+	
 	var direction = Input.get_vector("walk_left", "walk_right", "jump", "crouch")
 	if(direction.x != 0):
 		playerVel.x = direction.x * speed 
@@ -227,6 +234,7 @@ func _on_alembic_detection_area_exited(area):
 
 func _on_dash_time_timeout():
 	dashing = false
+	dash_particles.emitting = false
 
 
 func _on_dash_antispam_timeout():
