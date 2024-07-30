@@ -752,6 +752,7 @@ scale = Vector2(2, 2)
 texture_normal = ExtResource("2_5efrj")
 
 [node name="SPACE" type="TextureButton" parent="(Controls)/OR"]
+layout_mode = 0
 offset_left = 76.0002
 offset_top = -1.0
 offset_right = 124.0
@@ -940,8 +941,5 @@ region_enabled = true
 region_rect = Rect2(130, 0, 420, 272)
 
 [connection signal="tab_clicked" from="Volume - Music" to="." method="_on_volume__music_tab_clicked"]
-[connection signal="tab_selected" from="Volume - Music" to="." method="_on_volume__music_tab_selected"]
 [connection signal="tab_clicked" from="Volume - Sound Effects" to="." method="_on_volume__sound_effects_tab_clicked"]
-[connection signal="tab_selected" from="Volume - Sound Effects" to="." method="_on_volume__sound_effects_tab_selected"]
-[connection signal="pressed" from="BackButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
