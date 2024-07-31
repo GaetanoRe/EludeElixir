@@ -763,12 +763,13 @@ text = "Beware of the Darkness"
 autowrap_mode = 2
 
 [node name="TextEdit2" type="TextEdit" parent="."]
-offset_left = 1511.0
-offset_top = -48.0
-offset_right = 1723.0
-offset_bottom = -4.0
+offset_left = 1414.0
+offset_top = -106.0
+offset_right = 1645.0
+offset_bottom = -27.0
 theme_override_font_sizes/font_size = 20
-text = "Press E to drink Elixir"
+text = "Press E to drink ELIXIR
+Press SHIFT to DASH"
 
 [node name="TextEdit4" type="TextEdit" parent="."]
 offset_left = 4033.0
@@ -785,7 +786,7 @@ offset_top = 184.0
 offset_right = 4702.0
 offset_bottom = 235.0
 theme_override_font_sizes/font_size = 20
-text = "Take the platform up or JUMP!"
+text = "Take the platform up or JUMP!q"
 
 [node name="Platform2" parent="." instance=ExtResource("7_2dtjv")]
 position = Vector2(3075, 63)
