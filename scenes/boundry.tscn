@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci2xot34yxra5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfcme"]
+size = Vector2(155, 111)
+
+[node name="boundry" type="Area2D" groups=["traps"]]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_right = 155.0
+offset_bottom = 110.0
+color = Color(0, 0, 0, 0.447059)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(77.5, 55.5)
+shape = SubResource("RectangleShape2D_gfcme")
