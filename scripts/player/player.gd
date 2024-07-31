@@ -168,6 +168,7 @@ func _physics_process(delta):
 	var direction = Input.get_vector("walk_left", "walk_right", "jump", "crouch")
 	if(direction.x != 0):
 		playerVel.x = direction.x * speed 
+		dash_particles.gravity.x = -(int) (980 * direction.x)
 	else:
 		playerVel.x = 0
 	if(Input.is_action_pressed("jump") and is_on_floor()):
