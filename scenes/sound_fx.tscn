@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dayy52qstft45"]
+[gd_scene load_steps=6 format=3 uid="uid://dayy52qstft45"]
 
 [ext_resource type="Script" path="res://scripts/menus/start/SoundFX.gd" id="1_bvlmi"]
 [ext_resource type="AudioStream" uid="uid://cukmbr1vf1cb8" path="res://audio/menu click.mp3" id="2_xngyr"]
 [ext_resource type="AudioStream" uid="uid://5dewwpx61cqh" path="res://audio/volume click.mp3" id="3_jshu7"]
 [ext_resource type="AudioStream" uid="uid://doa0chn3sd3fv" path="res://audio/menu music.mp3" id="4_oed4u"]
+[ext_resource type="AudioStream" uid="uid://c3yamrq4vjca3" path="res://audio/dungeon music.mp3" id="5_qltsl"]
 
 [node name="SoundFX" type="Node"]
 script = ExtResource("1_bvlmi")
@@ -21,4 +22,5 @@ stream = ExtResource("4_oed4u")
 bus = &"Music"
 
 [node name="DungeonMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_qltsl")
 bus = &"Music"

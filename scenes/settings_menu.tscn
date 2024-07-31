@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://b3nyf8tp7aff4"]
+[gd_scene load_steps=92 format=3 uid="uid://b3nyf8tp7aff4"]
 
 [ext_resource type="Script" path="res://scripts/menus/start/settings_menu.gd" id="1_h3jse"]
 [ext_resource type="Texture2D" uid="uid://biw1do6xb1dc4" path="res://assets/icons/W_button.png" id="2_5efrj"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://d4mlk7pbq26g3" path="res://assets/icons/E_button.png" id="5_vk0qj"]
 [ext_resource type="Texture2D" uid="uid://c2fopqh65ynp2" path="res://assets/sprites/Character/Alchemist_Jump.png" id="6_kyu8x"]
 [ext_resource type="Texture2D" uid="uid://c46jfdj5jkr6l" path="res://assets/sprites/Character/Alchemist_Drink.png" id="6_xampe"]
+[ext_resource type="Texture2D" uid="uid://ryngwxoepouf" path="res://assets/icons/Shift_button.png" id="7_8w8f6"]
 [ext_resource type="Texture2D" uid="uid://b4f02ury3lpxj" path="res://assets/sprites/Character/Alchemist_Idle.png" id="7_ysl31"]
+[ext_resource type="Texture2D" uid="uid://tjq3kqr4ptmi" path="res://assets/icons/Ctrl_button.png" id="8_7ebkh"]
 [ext_resource type="Texture2D" uid="uid://2gvr4b8dhvfc" path="res://assets/sprites/Character/Alchemist_Run.png" id="8_a4d47"]
 [ext_resource type="Texture2D" uid="uid://bo02fvtfux4u0" path="res://assets/sprites/Character/Alchemist_Enveloped.png" id="9_0efmr"]
 [ext_resource type="Texture2D" uid="uid://c5mnggfhonf5s" path="res://assets/sprites/Character/Shadow_Jump.png" id="10_iky6k"]
@@ -594,9 +596,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -169.5
-offset_top = -223.0
+offset_top = -215.0
 offset_right = 169.5
-offset_bottom = -177.0
+offset_bottom = -169.0
 grow_horizontal = 2
 grow_vertical = 0
 focus_mode = 0
@@ -646,9 +648,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -169.5
-offset_top = -98.0
+offset_top = -90.0
 offset_right = 169.5
-offset_bottom = -52.0
+offset_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 0
 focus_mode = 0
@@ -703,9 +705,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -54.5
-offset_top = 50.0
+offset_top = 32.0
 offset_right = 54.5
-offset_bottom = 81.0
+offset_bottom = 63.0
 grow_horizontal = 2
 focus_mode = 0
 text = "CONTROLS"
@@ -761,7 +763,7 @@ scale = Vector2(2, 2)
 texture_normal = ExtResource("16_82wre")
 
 [node name="Line2D" type="Line2D" parent="(Controls)"]
-position = Vector2(-464.5, -53)
+position = Vector2(-464.5, -56)
 points = PackedVector2Array(413, 237, 432, 212)
 width = 3.0
 
@@ -798,67 +800,11 @@ texture_normal = ExtResource("3_8l3ol")
 [node name="E" type="TextureButton" parent="(Controls)"]
 layout_mode = 0
 offset_left = -15.5
-offset_top = 229.0
+offset_top = 223.0
 offset_right = 0.5
-offset_bottom = 245.0
+offset_bottom = 239.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("5_vk0qj")
-
-[node name="DRINK" type="LineEdit" parent="(Controls)"]
-layout_direction = 1
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 41.0
-offset_top = 197.0
-offset_right = 206.0
-offset_bottom = 228.0
-grow_horizontal = 2
-grow_vertical = 0
-focus_mode = 0
-theme_override_styles/read_only = SubResource("StyleBoxEmpty_b06t2")
-text = "DRINK ELUDE ELIXIR"
-alignment = 1
-editable = false
-expand_to_text_length = true
-context_menu_enabled = false
-virtual_keyboard_enabled = false
-shortcut_keys_enabled = false
-middle_mouse_paste_enabled = false
-selecting_enabled = false
-deselect_on_focus_loss_enabled = false
-drag_and_drop_selection_enabled = false
-
-[node name="MOVE LEFT _ RIGHT" type="LineEdit" parent="(Controls)"]
-layout_direction = 1
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 37.5
-offset_top = 125.0
-offset_right = 104.563
-offset_bottom = 156.0
-grow_horizontal = 2
-grow_vertical = 0
-focus_mode = 0
-theme_override_styles/read_only = SubResource("StyleBoxEmpty_b06t2")
-text = "MOVE "
-alignment = 1
-editable = false
-expand_to_text_length = true
-context_menu_enabled = false
-virtual_keyboard_enabled = false
-shortcut_keys_enabled = false
-middle_mouse_paste_enabled = false
-selecting_enabled = false
-deselect_on_focus_loss_enabled = false
-drag_and_drop_selection_enabled = false
 
 [node name="JUMP" type="LineEdit" parent="(Controls)"]
 layout_direction = 1
@@ -888,6 +834,126 @@ selecting_enabled = false
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 
+[node name="MOVE" type="LineEdit" parent="(Controls)"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 37.5
+offset_top = 122.0
+offset_right = 104.563
+offset_bottom = 153.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_b06t2")
+text = "MOVE "
+alignment = 1
+editable = false
+expand_to_text_length = true
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="DRINK" type="LineEdit" parent="(Controls)"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = 191.0
+offset_right = 206.0
+offset_bottom = 222.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_b06t2")
+text = "DRINK ELUDE ELIXIR"
+alignment = 1
+editable = false
+expand_to_text_length = true
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="DASH" type="LineEdit" parent="."]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = -327.0
+offset_right = 103.063
+offset_bottom = -296.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_b06t2")
+text = "DASH"
+alignment = 1
+editable = false
+expand_to_text_length = true
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(6, 113)
+points = PackedVector2Array(413, 237, 432, 212)
+width = 3.0
+
+[node name="SHIFT" type="TextureButton" parent="Line2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 296.0
+offset_top = 209.0
+offset_right = 344.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture_normal = ExtResource("7_8w8f6")
+metadata/_edit_use_anchors_ = true
+
+[node name="CTRL" type="TextureButton" parent="Line2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 442.0
+offset_top = 209.0
+offset_right = 490.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture_normal = ExtResource("8_7ebkh")
+
 [node name="Alchemist" type="AnimatedSprite2D" parent="."]
 position = Vector2(168, 225)
 scale = Vector2(5, 5)
@@ -904,37 +970,49 @@ flip_h = true
 
 [node name="Thor_SPACE" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(489.5, 151.16)
+position = Vector2(489.5, 133.16)
 scale = Vector2(0.41, 0.165106)
 texture = ExtResource("3_s0763")
 
 [node name="Thor_W" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(342, 150)
+position = Vector2(342, 133)
 scale = Vector2(0.16, 0.16)
 texture = ExtResource("3_s0763")
 
 [node name="Thor_A" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(441, 224)
+position = Vector2(441, 202)
 scale = Vector2(0.16, 0.16)
 texture = ExtResource("3_s0763")
 
 [node name="Thor_D" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(519, 224)
+position = Vector2(519, 202)
 scale = Vector2(0.16, 0.16)
 texture = ExtResource("3_s0763")
 
 [node name="Thor_E" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(521, 297)
+position = Vector2(521, 275)
 scale = Vector2(0.16, 0.16)
+texture = ExtResource("3_s0763")
+
+[node name="Thor_SHIFT" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(348.5, 340.16)
+scale = Vector2(0.41, 0.165106)
+texture = ExtResource("3_s0763")
+
+[node name="Thor_CTRL" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(506.5, 340.16)
+scale = Vector2(0.41, 0.165106)
 texture = ExtResource("3_s0763")
 
 [node name="PsGameJam15" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(949, 510)
+position = Vector2(949, 520)
 scale = Vector2(0.753676, 0.753676)
 texture = ExtResource("15_85kf2")
 region_enabled = true
