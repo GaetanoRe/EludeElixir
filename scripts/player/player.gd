@@ -138,7 +138,9 @@ func _input(event):
 		doses = 5
 		UI_anim.play("UI_Fill_Elixir")
 		print("Elixir refilled")
-
+	
+	if event.is_action_pressed("pause"):
+		UI_anim.play("UI_Enveloped")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
