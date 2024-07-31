@@ -28,9 +28,9 @@ func _process(delta):
 
 
 
-func _on_start_game_button_pressed():
+func _on_play_button_pressed():
 	SoundFx.button_click()
-	SoundFx.fade_menu_music()
+	SoundFx.fade_out_menu_music()
 	transition.play("FadeOut")
 	await get_tree().create_timer(1).timeout
 	var next_scene = load("res://scenes/dungeon.tscn")
@@ -47,4 +47,3 @@ func _on_settings_button_pressed():
 
 func _on_quit_button_pressed():
 	get_tree().quit()
-

@@ -48,8 +48,16 @@ func _process(delta):
 		$Thor_E.visible = true
 	elif !Input.is_action_pressed("drink"):
 		$Thor_E.visible = false
+	if Input.is_physical_key_pressed(KEY_SHIFT):
+		$Thor_SHIFT.visible = true
+	elif !Input.is_physical_key_pressed(KEY_SHIFT):
+		$Thor_SHIFT.visible = false
+	if Input.is_physical_key_pressed(KEY_CTRL):
+		$Thor_CTRL.visible = true
+	elif !Input.is_physical_key_pressed(KEY_CTRL):
+		$Thor_CTRL.visible = false
 	
-	if Input.is_physical_key_pressed(KEY_SPACE) and Input.is_physical_key_pressed(KEY_W) and Input.is_action_pressed("walk_left") and Input.is_action_pressed("walk_right") and Input.is_action_pressed("drink") :
+	if Input.is_physical_key_pressed(KEY_SPACE) and Input.is_physical_key_pressed(KEY_W) and Input.is_action_pressed("walk_left") and Input.is_action_pressed("walk_right") and Input.is_action_pressed("drink") and Input.is_physical_key_pressed(KEY_SHIFT) and Input.is_physical_key_pressed(KEY_CTRL):
 		$PsGameJam15.visible = true
 
 	if Input.is_action_just_pressed("drink") and $Alchemist.get_animation() ==  "Alchemist_Idle":

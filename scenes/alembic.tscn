@@ -1,7 +1,100 @@
-[gd_scene load_steps=4 format=3 uid="uid://cflgp42sj1api"]
+[gd_scene load_steps=18 format=3 uid="uid://cflgp42sj1api"]
 
 [ext_resource type="Script" path="res://scripts/misc/alembic.gd" id="1_cg80u"]
 [ext_resource type="Texture2D" uid="uid://bg56bftstvxjl" path="res://assets/sprites/objects/Alembic test 1.png" id="1_fk07c"]
+[ext_resource type="Texture2D" uid="uid://870qu20idkrq" path="res://assets/sprites/objects/Alembic_Animation.png" id="2_bucx4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmdn3"]
+atlas = ExtResource("2_bucx4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycts8"]
+atlas = ExtResource("2_bucx4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5nqq"]
+atlas = ExtResource("2_bucx4")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1n4v"]
+atlas = ExtResource("2_bucx4")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xpo7"]
+atlas = ExtResource("2_bucx4")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnea0"]
+atlas = ExtResource("2_bucx4")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lubrj"]
+atlas = ExtResource("2_bucx4")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6dbu"]
+atlas = ExtResource("2_bucx4")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m1ol"]
+atlas = ExtResource("2_bucx4")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkyoq"]
+atlas = ExtResource("2_bucx4")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f5r2"]
+atlas = ExtResource("2_bucx4")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mih3"]
+atlas = ExtResource("2_bucx4")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_01hx3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmdn3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycts8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5nqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1n4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xpo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnea0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lubrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6dbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5m1ol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pkyoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f5r2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mih3")
+}],
+"loop": true,
+"name": &"Alembic_Anim",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ciox4"]
 size = Vector2(25.4167, 20)
@@ -12,7 +105,13 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("1_cg80u")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_01hx3")
+animation = &"Alembic_Anim"
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 scale = Vector2(2, 2)
 texture = ExtResource("1_fk07c")
