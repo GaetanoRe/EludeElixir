@@ -243,3 +243,4 @@ func _on_dash_time_timeout():
 func _on_dash_antispam_timeout():
 	can_dash = true
 	cooldown_end.emit()
+
