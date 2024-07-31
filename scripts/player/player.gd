@@ -35,6 +35,8 @@ var can_dash = true
 signal doses_changed
 signal countdown_start
 signal countdown_end
+signal cooldown_start
+signal cooldown_end
 
 
 # Called when the node enters the scene tree for the first time.
@@ -154,6 +156,7 @@ func _physics_process(delta):
 		dashing = true
 		dash_time.start()
 		dash_antispam.start()
+		cooldown_start.emit()
 		#dash_particles.emitting = true if dash.is_dashing() else false
 		if dashing:
 			dash_particles.emitting = true
@@ -239,3 +242,4 @@ func _on_dash_time_timeout():
 
 func _on_dash_antispam_timeout():
 	can_dash = true
+	cooldown_end.emit()
